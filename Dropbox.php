@@ -1,6 +1,6 @@
 <?php
     class Dropbox {
-        public $token;
+        private $token;
         public function download($path, $target) {
             /*curl -X POST https://content.dropboxapi.com/2/files/download \
                 --header "Authorization: Bearer <get access token>" \
@@ -103,6 +103,7 @@
             curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode(array( "path" => $path, "settings" => array( "requested_visibility" => "public"))));
             
             $data = curl_exec($ch);
+            curl_close($ch);
             $returnData = json_decode($data, true);
             if ($returnData["error"] !== null) {
                 return $returnData["error_summary"];
@@ -114,6 +115,18 @@
         
         public function __construct($accesstoken) {
             $this->token = $accesstoken;
+        }
+        
+        private function postRequest($endpoint, $headers, $data) {
+            $ch = curl_init($endpoint);
+            array_push($headers, "Authorization: Bearer $this->token");
+            curl_setopt($ch, CURLOPT_POST, TRUE);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+            $r = curl_exec($ch);
+            curl_close($ch);
+            return $json_decode($r, true);
         }
     }
 
