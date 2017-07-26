@@ -23,9 +23,9 @@ PHP SDK for Dropbox built with the v2 API
 - [x] /create_folder *DEPRECATED BY /create_folder_v2*
 - [x] /create_folder_v2
 - [x] /delete *DEPRECATED BY /delete_v2*
-- [ ] /delete_batch
-- [ ] /delete_batch/check
-- [ ] /delete_v2
+- [x] /delete_batch
+- [x] /delete_batch/check
+- [x] /delete_v2
 - [x] /download
 - [ ] /get_metadata
 - [ ] /get_preview
