@@ -2,3 +2,121 @@
 PHP SDK for Dropbox built with the v2 API
 
 *IN DEVELOPMENT*
+*Last update: 7/26/2017*
+
+### auth
+- [ ] /token/from_oauth1
+- [ ] /token/revoke
+
+### files
+- [ ] /alpha/get_metadata
+- [ ] /alpha/upload
+- [ ] /copy
+- [ ] /copy_batch
+- [ ] /coby_batch/check
+- [ ] /copy_reference/get
+- [ ] /copy_reference/save
+- [ ] /copy_v2
+- [ ] /create_folder
+- [ ] /create_folder_v2
+- [x] /delete
+- [ ] /delete_batch
+- [ ] /delete_batch/check
+- [ ] /delete_v2
+- [x] /download
+- [ ] /get_metadata
+- [ ] /get_preview
+- [ ] /get_temporary_link
+- [ ] /get_thumbnail
+- [x] /list_folder
+- [ ] /list_folder/continue
+- [ ] /list_folder/get_latest_cursor
+- [ ] /list_folder/longpoll
+- [ ] /list_revisions
+- [ ] /move
+- [ ] /move_batch
+- [ ] /move_batch/check
+- [ ] /move_v2
+- [ ] /permanently_delete
+- [ ] /properties/add
+- [ ] /properties/overwrite
+- [ ] /properties/remove
+- [ ] /properties/template/get
+- [ ] /properties/update
+- [ ] /restore
+- [ ] /save_url
+- [ ] /save_url/check_job_status
+- [ ] /search
+- [x] /upload
+- [ ] /upload_session/append
+- [ ] /upload_session/append_v2
+- [ ] /upload_session/finish
+- [ ] /upload_session/finish_batch
+- [ ] /upload_session/finish_batch/check
+- [ ] /upload_session/start
+
+### paper
+- [ ] /docs/archive
+- [ ] /docs/download
+- [ ] /docs/folder_users/list
+- [ ] /docs/folder_users/list/continue
+- [ ] /docs/get_folder_info
+- [ ] /docs/list
+- [ ] /docs/list/continue
+- [ ] /docs/permanently_delete
+- [ ] /docs/sharing_policy/get
+- [ ] /docs/sharing_policy/set
+- [ ] /docs/users/add
+- [ ] /docs/users/list
+- [ ] /docs/users/list/continue
+- [ ] /docs/users/remove
+
+### sharing
+- [ ] /add_file_member
+- [ ] /add_folder_member
+- [ ] /change_file_member_access
+- [ ] /check_job_status
+- [ ] /check_remove_member_job_status
+- [ ] /check_share_job_status
+- [ ] /create_shared_link
+- [x] /create_shared_link_with_settings
+- [ ] /get_file_metadata
+- [ ] /get_file_metadata/batch
+- [ ] /get_folder_metadata
+- [ ] /get_shared_link_file
+- [ ] /get_shared_link_metadata
+- [ ] /get_shared_links
+- [ ] /list_file_members
+- [ ] /list_file_members/batch
+- [ ] /list_file_members/continue
+- [ ] /list_folder_members
+- [ ] /list_folder_members/continue
+- [ ] /list_folders
+- [ ] /list_folders/continue
+- [ ] /list_mountable_folders
+- [ ] /list_mountable_folders/continue
+- [ ] /list_received_files
+- [ ] /list_received_files/continue
+- [ ] /list_shared_links
+- [ ] /modify_shared_link_settings
+- [ ] /mount_folder
+- [ ] /relinquish_file_membership
+- [ ] /relinquish_folder_membership
+- [ ] /remove_file_member
+- [ ] /remove_file_member_2
+- [ ] /remove_folder_member
+- [ ] /revoke_shared_link
+- [ ] /share_folder
+- [ ] /transfer_folder
+- [ ] /unmount_folder
+- [ ] /unshare_file
+- [ ] /unshare_folder
+- [ ] /update_file_member
+- [ ] /update_folder_member
+- [ ] /update_folder_policy
+
+### users
+- [ ] /get_account
+- [ ] /get_account_batch
+- [ ] /get_current_account
+- [ ] /get_space_usage
