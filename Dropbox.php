@@ -1,6 +1,73 @@
 <?php
     class Dropbox {
         private $token;
+        
+        
+        // ****  *****  *     ****   ****
+        // *       *    *     *     *    
+        // ***     *    *     ***    *** 
+        // *       *    *     *         *
+        // *     *****  ****  ****  **** 
+        
+        /**
+        * Copies a file from one location to another
+        * 
+        */
+        public function copy($from_path, $to_path, $allow_shared_folder = FALSE, $autorename = FALSE, allow_ownership_transfer = FALSE) {
+            $endpoint = "https://api.dropboxapi.com/2/files/copy";
+            $headers = array(
+                "Content-Type: application/json"
+            );
+            $postdata = json_encode(array( "from_path" => $from_path, "to_path" => $to_path, "allow_shared_folder" => $allow_shared_folder, "autorename" => $autorename, "allow_ownership_transfer" = $allow_ownership_transfer));
+            $returnData = postRequest($endpoint, $headers, $postdata);
+            if (isset($returnData["error"])) {
+                return $returnData["error_summary"];
+            }
+            else {
+                return $returnData;
+            }
+            
+        }
+        
+        /**
+        * Copies a list of entries between paths
+        * $entries contains a list of RelocationPath objects (objects with a "from_path" value and a "to_path" value)
+        * returns either completed response data or an async_job_id if the processing is asynchronous
+        */
+        public function copy_batch($entries, $allow_shared_folder = FALSE, $autorename = FALSE, allow_ownership_transfer = FALSE) {
+            $endpoint = "https://api.dropboxapi.com/2/files/copy_batch";
+            $headers = array(
+                "Content-Type: application/json"
+            );
+            $postdata = json_encode(array( "entries" => $entries, "allow_shared_folder" => $allow_shared_folder, "autorename" => $autorename, "allow_ownership_transfer" = $allow_ownership_transfer));
+            $returnData = postRequest($endpoint, $headers, $postdata);
+            if (isset($returnData["error"])) {
+                return $returnData["error_summary"];
+            }
+            else {
+                return $returnData;
+            }
+        }
+        
+        /**
+        * Checks the progress of an asynchronous copy_batch operation
+        *
+        */
+        public function copy_batch_check($async_job_id) {
+            $endpoint = "https://api.dropboxapi.com/2/files/copy_batch/check";
+            $headers = array(
+                "Content-Type: application/json"
+            );
+            $postdata = json_encode(array( "async_job_id" => $async_job_id ));
+            $returnData = postRequest($endpoint, $headers, $postdata);
+            if (isset($returnData["error"])) {
+                return $returnData["error_summary"];
+            }
+            else {
+                return $returnData;
+            }
+        }
+        
         public function download($path, $target) {
             $endpoint = "https://content.dropboxapi.com/2/files/download";
             $headers = array(
@@ -11,6 +78,21 @@
             $file = fopen($target, 'w');
             fwrite($file, $data);
             fclose($file);
+        }
+        
+        public function listFilesInFolder($path, $recursive = FALSE, $include_media_info = FALSE, $include_has_explicit_shared_members = FALSE) {
+            $endpoint = "https://api.dropboxapi.com/2/files/list_folder";
+            $headers = array(
+                "Content-Type: application/json",
+            );
+            $postdata = json_encode(array( "path" => $path, "recursive" => $recursive, "include_media_info" => $include_media_info, "include_has_explicit_shared_members" => $include_has_explicit_shared_members));
+            $returnData = postRequest($endpoint, $headers, $postdata);
+            if (isset($returnData["error"])) {
+                return $returnData["error_summary"];
+            }
+            else {
+                return $returnData;
+            }
         }
         
         /*
@@ -70,27 +152,6 @@
             }
             else {
                 return $returnData["url"];
-            }
-        }
-        
-        public function listFilesInFolder($path, $recursive = FALSE, $include_media_info = FALSE, $include_has_explicit_shared_members = FALSE) {
-            /*
-            curl -X POST https://api.dropboxapi.com/2/files/list_folder \
-    --header "Authorization: Bearer <get access token>" \
-    --header "Content-Type: application/json" \
-    --data "{\"path\": \"/Homework/math\",\"recursive\": false,\"include_media_info\": false,\"include_deleted\": false,\"include_has_explicit_shared_members\": false}"
-            */
-            $endpoint = "https://api.dropboxapi.com/2/files/list_folder";
-            $headers = array(
-                "Content-Type: application/json",
-            );
-            $postdata = json_encode(array( "path" => $path, "recursive" => $recursive, "include_media_info" => $include_media_info, "include_has_explicit_shared_members" => $include_has_explicit_shared_members));
-            $returnData = postRequest($endpoint, $headers, $postdata);
-            if (isset($returnData["error"])) {
-                return $returnData["error_summary"];
-            }
-            else {
-                return $returnData;
             }
         }
         

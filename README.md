@@ -2,24 +2,27 @@
 PHP SDK for Dropbox built with the v2 API
 
 *IN DEVELOPMENT*
+================
 *Last update: 7/26/2017*
+
+**Bolded** items will not be implemented.
 
 ### auth
 - [ ] /token/from_oauth1
 - [ ] /token/revoke
 
 ### files
-- [ ] /alpha/get_metadata
-- [ ] /alpha/upload
-- [ ] /copy
-- [ ] /copy_batch
-- [ ] /coby_batch/check
+- [ ] **/alpha/get_metadata** *PREVIEW*
+- [ ] **/alpha/upload** *PREVIEW*
+- [x] /copy *DEPRECATED BY /copy_v2*
+- [x] /copy_batch
+- [x] /copy_batch/check
 - [ ] /copy_reference/get
 - [ ] /copy_reference/save
 - [ ] /copy_v2
-- [ ] /create_folder
+- [ ] /create_folder *DEPRECATED BY /create_folder_v2*
 - [ ] /create_folder_v2
-- [x] /delete
+- [x] /delete *DEPRECATED BY /delete_v2*
 - [ ] /delete_batch
 - [ ] /delete_batch/check
 - [ ] /delete_v2
@@ -33,22 +36,22 @@ PHP SDK for Dropbox built with the v2 API
 - [ ] /list_folder/get_latest_cursor
 - [ ] /list_folder/longpoll
 - [ ] /list_revisions
-- [ ] /move
+- [ ] /move *DEPRECATED BY /move_v2*
 - [ ] /move_batch
 - [ ] /move_batch/check
 - [ ] /move_v2
 - [ ] /permanently_delete
-- [ ] /properties/add
-- [ ] /properties/overwrite
-- [ ] /properties/remove
-- [ ] /properties/template/get
-- [ ] /properties/update
+- [ ] **/properties/add** *PREVIEW*
+- [ ] **/properties/overwrite** *PREVIEW*
+- [ ] **/properties/remove** *PREVIEW*
+- [ ] **/properties/template/get** *PREVIEW*
+- [ ] **/properties/update** *PREVIEW*
 - [ ] /restore
 - [ ] /save_url
 - [ ] /save_url/check_job_status
 - [ ] /search
 - [x] /upload
-- [ ] /upload_session/append
+- [ ] /upload_session/append *DEPRECATED BY /upload_session/append_v2*
 - [ ] /upload_session/append_v2
 - [ ] /upload_session/finish
 - [ ] /upload_session/finish_batch
@@ -74,18 +77,18 @@ PHP SDK for Dropbox built with the v2 API
 ### sharing
 - [ ] /add_file_member
 - [ ] /add_folder_member
-- [ ] /change_file_member_access
+- [ ] /change_file_member_access *DEPRECATED BY /update_file_member*
 - [ ] /check_job_status
 - [ ] /check_remove_member_job_status
 - [ ] /check_share_job_status
-- [ ] /create_shared_link
+- [ ] /create_shared_link *DEPRECATED BY /create_shared_link_with_settings*
 - [x] /create_shared_link_with_settings
 - [ ] /get_file_metadata
 - [ ] /get_file_metadata/batch
 - [ ] /get_folder_metadata
 - [ ] /get_shared_link_file
 - [ ] /get_shared_link_metadata
-- [ ] /get_shared_links
+- [ ] /get_shared_links *DEPRECATED BY /list_shared_links*
 - [ ] /list_file_members
 - [ ] /list_file_members/batch
 - [ ] /list_file_members/continue
@@ -102,7 +105,7 @@ PHP SDK for Dropbox built with the v2 API
 - [ ] /mount_folder
 - [ ] /relinquish_file_membership
 - [ ] /relinquish_folder_membership
-- [ ] /remove_file_member
+- [ ] /remove_file_member *DEPRECATED BY /remove_file_member_2
 - [ ] /remove_file_member_2
 - [ ] /remove_folder_member
 - [ ] /revoke_shared_link
