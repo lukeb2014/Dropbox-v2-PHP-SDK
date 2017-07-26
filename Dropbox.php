@@ -3,6 +3,16 @@
         private $token;
         
         
+        //     *      *   *  *****  *   *
+        //    * *     *   *    *    *   *
+        //   *****    *   *    *    *****
+        //  *     *   *   *    *    *   *
+        // *       *   ***     *    *   *
+        
+        
+        
+        
+        
         // ****  *****  *     ****   ****
         // *       *    *     *     *    
         // ***     *    *     ***    *** 
@@ -160,6 +170,78 @@
             }
         }
         
+        /**
+        * deletes a file or folder at a given path
+        * DEPRECATED by delete_v2
+        */
+        public function delete($path) {
+            $endpoint = "https://api.dropboxapi.com/2/files/delete";
+            $headers = array(
+                "Content-Type: application/json"
+            );
+            $postdata = json_encode(array( "path" => $path ));
+            $returnData = postRequest($endpoint, $headers, $postdata);
+            if (isset($returnData["error"])) {
+                return $returnData["error_summary"];
+            }
+            else {
+                return $returnData;
+            }
+        }
+        
+        
+        /**
+        * deletes files and/or folders in $entries
+        * $entries contains a list of a single value "path"
+        */
+        public function delete_batch($entries) {
+            $endpoint = "https://api.dropboxapi.com/2/files/delete_batch";
+            $headers = array(
+                "Content-Type: application/json"
+            );
+            $postdata = json_encode(array( "entries" => $entries ));
+            return postRequest($endpoint, $headers, $postdata);
+        }
+        
+        
+        /**
+        * Checks the progress of an asynchronous delete_batch operation
+        *
+        */
+        public function delete_batch_check($async_job_id) {
+            $endpoint = "https://api.dropboxapi.com/2/files/delete_batch/check";
+            $headers = array(
+                "Content-Type: application/json"
+            );
+            $postdata = json_encode(array( "async_job_id" => $async_job_id ));
+            $returnData = postRequest($endpoint, $headers, $postdata);
+            if (isset($returnData["error"])) {
+                return $returnData["error_summary"];
+            }
+            else {
+                return $returnData;
+            }
+        }
+        
+        /**
+        * deletes a file or folder at a given path
+        * 
+        */
+        public function delete($path) {
+            $endpoint = "https://api.dropboxapi.com/2/files/delete_v2";
+            $headers = array(
+                "Content-Type: application/json"
+            );
+            $postdata = json_encode(array( "path" => $path ));
+            $returnData = postRequest($endpoint, $headers, $postdata);
+            if (isset($returnData["error"])) {
+                return $returnData["error_summary"];
+            }
+            else {
+                return $returnData;
+            }
+        }
+        
         public function download($path, $target) {
             $endpoint = "https://content.dropboxapi.com/2/files/download";
             $headers = array(
@@ -207,29 +289,14 @@
             }
         }
         
-        public function delete($path) {
-            $endpoint = "https://api.dropboxapi.com/2/files/delete";
-            $headers = array(
-                "Content-Type: application/json"
-            );
-            $postdata = json_encode(array( "path" => $path ));
-            return postRequest($endpoint, $headers, $postdata);
-        }
+        //  ****  *   *      *      ***    *****  *   *   ***
+        // *      *   *     * *     *  *     *    **  *  *
+        //  ***   *****    *****    ***      *    * * *  *  **
+        //     *  *   *   *     *   *  *     *    *  **  *   *
+        // ****   *   *  *       *  *   *  *****  *   *   ***
         
-        public function isValidPath($path) {
-            $endpoint = "https://api.dropboxapi.com/2/files/get_metadata";
-            $headers = array(
-                "Content-Type: application/json"
-            );
-            $postdata = json_encode(array( "path" => $path, "include_media_info" => FALSE, "include_deleted" => FALSE, "include_has_explicit_shared_members" => false));
-            $returnData = postRequest($endpoint, $headers, $postdata);
-            if ($returnData["error"] !== null) {
-                return FALSE;
-            }
-            else {
-                return TRUE;
-            }
-        }
+        
+        
         
         public function createSharedLinkWithSettings($path) {
             $endpoint = "https://api.dropboxapi.com/2/sharing/create_shared_link_with_settings";
@@ -248,6 +315,12 @@
         }
         
         
+        // *   *  *****   ****   ****
+        // ** **    *    *      *
+        // * * *    *     ***   *
+        // *   *    *        *  *      
+        // *   *  *****  ****    ****  *
+        
         public function __construct($accesstoken) {
             $this->token = $accesstoken;
         }
@@ -265,6 +338,21 @@
                 return $json_decode($r, true);
             else
                 return $r;
+        }
+        
+        public function isValidPath($path) {
+            $endpoint = "https://api.dropboxapi.com/2/files/get_metadata";
+            $headers = array(
+                "Content-Type: application/json"
+            );
+            $postdata = json_encode(array( "path" => $path, "include_media_info" => FALSE, "include_deleted" => FALSE, "include_has_explicit_shared_members" => false));
+            $returnData = postRequest($endpoint, $headers, $postdata);
+            if ($returnData["error"] !== null) {
+                return FALSE;
+            }
+            else {
+                return TRUE;
+            }
         }
     }
 
