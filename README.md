@@ -17,11 +17,11 @@ PHP SDK for Dropbox built with the v2 API
 - [x] /copy *DEPRECATED BY /copy_v2*
 - [x] /copy_batch
 - [x] /copy_batch/check
-- [ ] /copy_reference/get
-- [ ] /copy_reference/save
-- [ ] /copy_v2
-- [ ] /create_folder *DEPRECATED BY /create_folder_v2*
-- [ ] /create_folder_v2
+- [x] /copy_reference/get
+- [x] /copy_reference/save
+- [x] /copy_v2
+- [x] /create_folder *DEPRECATED BY /create_folder_v2*
+- [x] /create_folder_v2
 - [x] /delete *DEPRECATED BY /delete_v2*
 - [ ] /delete_batch
 - [ ] /delete_batch/check

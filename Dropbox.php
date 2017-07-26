@@ -26,7 +26,6 @@
             else {
                 return $returnData;
             }
-            
         }
         
         /**
@@ -59,6 +58,99 @@
                 "Content-Type: application/json"
             );
             $postdata = json_encode(array( "async_job_id" => $async_job_id ));
+            $returnData = postRequest($endpoint, $headers, $postdata);
+            if (isset($returnData["error"])) {
+                return $returnData["error_summary"];
+            }
+            else {
+                return $returnData;
+            }
+        }
+        
+        /**
+        * Get a copy reference to a file or folder.
+        * This reference string can be used to save that file or folder to another user's Dropbox by passing it to copy_reference/save
+        */
+        public function copy_reference_get($path) {
+            $endpoint = "https://api.dropboxapi.com/2/files/copy_reference/get";
+            $headers = array(
+                "Content-Type: application/json"
+            );
+            $postdata = json_encode(array( "path" => $path ));
+            $returnData = postRequest($endpoint, $headers, $postdata);
+            if (isset($returnData["error"])) {
+                return $returnData["error_summary"];
+            }
+            else {
+                return $returnData;
+            }
+        }
+        
+        /**
+        * Save a copy reference returned by copy_reference/get to the user's Dropbox
+        */
+        public function copy_reference_save($path, $copy_reference) {
+            $endpoint = "https://api.dropboxapi.com/2/files/copy_reference/save";
+            $headers = array(
+                "Content-Type: application/json"
+            );
+            $postdata = json_encode(array( "copy_reference" => $copy_reference, "path" => $path ));
+            $returnData = postRequest($endpoint, $headers, $postdata);
+            if (isset($returnData["error"])) {
+                return $returnData["error_summary"];
+            }
+            else {
+                return $returnData;
+            }
+        }
+        
+        /**
+        * Copies a file from one location to another
+        * 
+        */
+        public function copy_v2($from_path, $to_path, $allow_shared_folder = FALSE, $autorename = FALSE, allow_ownership_transfer = FALSE) {
+            $endpoint = "https://api.dropboxapi.com/2/files/copy_v2";
+            $headers = array(
+                "Content-Type: application/json"
+            );
+            $postdata = json_encode(array( "from_path" => $from_path, "to_path" => $to_path, "allow_shared_folder" => $allow_shared_folder, "autorename" => $autorename, "allow_ownership_transfer" = $allow_ownership_transfer));
+            $returnData = postRequest($endpoint, $headers, $postdata);
+            if (isset($returnData["error"])) {
+                return $returnData["error_summary"];
+            }
+            else {
+                return $returnData;
+            }
+        }
+        
+        /**
+        * creates a folder at a given path
+        * DEPRECATED BY create_folder_v2
+        */
+        public function create_folder($path, $autorename = FALSE) {
+            $endpoint = "https://api.dropboxapi.com/2/files/create_folder";
+            $headers = array(
+                "Content-Type: application/json"
+            );
+            $postdata = json_encode(array( "path" => $path, "autorename" => $autorename ));
+            $returnData = postRequest($endpoint, $headers, $postdata);
+            if (isset($returnData["error"])) {
+                return $returnData["error_summary"];
+            }
+            else {
+                return $returnData;
+            }
+        }
+        
+        /**
+        * creates a folder at a given path
+        */
+        public function create_folder_v2($path, $autorename = FALSE) {
+            $endpoint = "https://api.dropboxapi.com/2/files/create_folder_v2";
+            $headers = array(
+                "Content-Type: application/json"
+            );
+            $postdata = json_encode(array( "path" => $path, "autorename" => $autorename ));
             $returnData = postRequest($endpoint, $headers, $postdata);
             if (isset($returnData["error"])) {
                 return $returnData["error_summary"];
