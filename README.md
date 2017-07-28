@@ -36,20 +36,20 @@ PHP SDK for Dropbox built with the v2 API
 - [x] /list_folder/get_latest_cursor
 - [x] /list_folder/longpoll
 - [x] /list_revisions
-- [ ] /move *DEPRECATED BY /move_v2*
-- [ ] /move_batch
-- [ ] /move_batch/check
-- [ ] /move_v2
-- [ ] /permanently_delete
+- [x] /move *DEPRECATED BY /move_v2*
+- [x] /move_batch
+- [x] /move_batch/check
+- [x] /move_v2
+- [x] /permanently_delete
 - [ ] **/properties/add** *PREVIEW*
 - [ ] **/properties/overwrite** *PREVIEW*
 - [ ] **/properties/remove** *PREVIEW*
 - [ ] **/properties/template/get** *PREVIEW*
 - [ ] **/properties/update** *PREVIEW*
-- [ ] /restore
-- [ ] /save_url
-- [ ] /save_url/check_job_status
-- [ ] /search
+- [x] /restore
+- [x] /save_url
+- [x] /save_url/check_job_status
+- [x] /search
 - [x] /upload
 - [ ] /upload_session/append *DEPRECATED BY /upload_session/append_v2*
 - [ ] /upload_session/append_v2

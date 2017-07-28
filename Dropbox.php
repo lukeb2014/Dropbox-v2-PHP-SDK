@@ -430,6 +430,177 @@
             }
         }
         
+        /**
+        * moves a file from one location to another
+        * DEPRECATED by move_v2
+        */
+        public function move($from_path, $to_path, $allow_shared_folder = FALSE, $autorename = FALSE, allow_ownership_transfer = FALSE) {
+            $endpoint = "https://api.dropboxapi.com/2/files/move";
+            $headers = array(
+                "Content-Type: application/json"
+            );
+            $postdata = json_encode(array( "from_path" => $from_path, "to_path" => $to_path, "allow_shared_folder" => $allow_shared_folder, "autorename" => $autorename, "allow_ownership_transfer" = $allow_ownership_transfer));
+            $returnData = postRequest($endpoint, $headers, $postdata);
+            if (isset($returnData["error"])) {
+                return $returnData["error_summary"];
+            }
+            else {
+                return $returnData;
+            }
+        }
+        
+        /**
+        * moves a list of entries between paths
+        * $entries contains a list of RelocationPath objects (objects with a "from_path" value and a "to_path" value)
+        * returns either completed response data or an async_job_id if the processing is asynchronous
+        */
+        public function move_batch($entries, $allow_shared_folder = FALSE, $autorename = FALSE, allow_ownership_transfer = FALSE) {
+            $endpoint = "https://api.dropboxapi.com/2/files/move_batch";
+            $headers = array(
+                "Content-Type: application/json"
+            );
+            $postdata = json_encode(array( "entries" => $entries, "allow_shared_folder" => $allow_shared_folder, "autorename" => $autorename, "allow_ownership_transfer" = $allow_ownership_transfer));
+            $returnData = postRequest($endpoint, $headers, $postdata);
+            if (isset($returnData["error"])) {
+                return $returnData["error_summary"];
+            }
+            else {
+                return $returnData;
+            }
+        }
+        
+        /**
+        * Checks the progress of an asynchronous move_batch operation
+        *
+        */
+        public function move_batch_check($async_job_id) {
+            $endpoint = "https://api.dropboxapi.com/2/files/move_batch/check";
+            $headers = array(
+                "Content-Type: application/json"
+            );
+            $postdata = json_encode(array( "async_job_id" => $async_job_id ));
+            $returnData = postRequest($endpoint, $headers, $postdata);
+            if (isset($returnData["error"])) {
+                return $returnData["error_summary"];
+            }
+            else {
+                return $returnData;
+            }
+        }
+        
+        /**
+        * moves a file from one location to another
+        */
+        public function move_v2($from_path, $to_path, $allow_shared_folder = FALSE, $autorename = FALSE, allow_ownership_transfer = FALSE) {
+            $endpoint = "https://api.dropboxapi.com/2/files/move_v2";
+            $headers = array(
+                "Content-Type: application/json"
+            );
+            $postdata = json_encode(array( "from_path" => $from_path, "to_path" => $to_path, "allow_shared_folder" => $allow_shared_folder, "autorename" => $autorename, "allow_ownership_transfer" = $allow_ownership_transfer));
+            $returnData = postRequest($endpoint, $headers, $postdata);
+            if (isset($returnData["error"])) {
+                return $returnData["error_summary"];
+            }
+            else {
+                return $returnData;
+            }
+        }
+        
+        /**
+        * permanently deletes a file or folder
+        * Note: this endpoint is only available for Dropbox Business apps
+        */
+        public function permanently_delete($path) {
+            $endpoint = "https://api.dropboxapi.com/2/files/permanently_delete";
+            $headers = array(
+                "Content-Type: application/json"
+            );
+            $postdata = json_encode(array( "path" => $path));
+            $returnData = postRequest($endpoint, $headers, $postdata);
+            if (isset($returnData["error"])) {
+                return $returnData["error_summary"];
+            }
+            else {
+                return $returnData;
+            }
+        }
+        
+        /**
+        * restore a file to a specific revision
+        */
+        public function restore($path, $rev) {
+            $endpoint = "https://api.dropboxapi.com/2/files/restore";
+            $headers = array(
+                "Content-Type: application/json"
+            );
+            $postdata = json_encode(array( "path" => $path, "rev" => $rev));
+            $returnData = postRequest($endpoint, $headers, $postdata);
+            if (isset($returnData["error"])) {
+                return $returnData["error_summary"];
+            }
+            else {
+                return $returnData;
+            }
+        }
+        
+        /**
+        * saves a specified URL into a file in user's Dropbox
+        */
+        public function save_url($path, $url) {
+            $endpoint = "https://api.dropboxapi.com/2/files/save_url";
+            $headers = array(
+                "Content-Type: application/json"
+            );
+            $postdata = json_encode(array( "path" => $path, "url" => $url));
+            $returnData = postRequest($endpoint, $headers, $postdata);
+            if (isset($returnData["error"])) {
+                return $returnData["error_summary"];
+            }
+            else {
+                return $returnData;
+            }
+        }
+        
+        /**
+        * Checks the progress of an asynchronous save_url operation
+        */
+        public function move_batch_check($async_job_id) {
+            $endpoint = "https://api.dropboxapi.com/2/files/save_url/check_job_status";
+            $headers = array(
+                "Content-Type: application/json"
+            );
+            $postdata = json_encode(array( "async_job_id" => $async_job_id ));
+            $returnData = postRequest($endpoint, $headers, $postdata);
+            if (isset($returnData["error"])) {
+                return $returnData["error_summary"];
+            }
+            else {
+                return $returnData;
+            }
+        }
+        
+        /**
+        * searches for files and folders
+        * $query, the string to search for
+        * $start, starting index (default 0)
+        * $max_results, maximum number of results (default 100)
+        * $mode, SearchMode 'filename', 'filename_and_content', 'deleted_filename' (default filename)
+        */
+        public function search($path, $query, $start = 0, $max_results = 100, $mode = "filename") {
+            $endpoint = "https://api.dropboxapi.com/2/files/search";
+            $headers = array(
+                "Content-Type: application/json"
+            );
+            $postdata = json_encode(array( "path" => $path, "query" => $query, "start" => $start, "max_results" => $max_results, "mode" => $mode));
+            $returnData = postRequest($endpoint, $headers, $postdata);
+            if (isset($returnData["error"])) {
+                return $returnData["error_summary"];
+            }
+            else {
+                return $returnData;
+            }
+        }
+        
         /*
         * @parameter $mode: "add", "update", "overwrite"
         */
