@@ -254,12 +254,173 @@
             fclose($file);
         }
         
-        public function listFilesInFolder($path, $recursive = FALSE, $include_media_info = FALSE, $include_has_explicit_shared_members = FALSE) {
+        /**
+        * Returns the metadata for a file or folder
+        */
+        public function get_metadata($path, $include_media_info = FALSE, $include_deleted = FALSE, $include_has_explicit_shared_members = FALSE) {
+            $endpoint = "https://api.dropboxapi.com/2/files/get_metadata";
+            $headers = array(
+                "Content-Type: application/json",
+            );
+            $postdata = json_encode(array( "path" => $path, "include_media_info" => $include_media_info, "include_deleted" => $include_deleted, "include_has_explicit_shared_members" => $include_has_explicit_shared_members));
+            $returnData = postRequest($endpoint, $headers, $postdata);
+            if (isset($returnData["error"])) {
+                return $returnData["error_summary"];
+            }
+            else {
+                return $returnData;
+            }
+        }
+        
+        /**
+        * gets a preview for a file
+        * $path: the dropbox path, id:, rev:, of a file
+        * $target: where the file is being downloaded to
+        */
+        public function get_preview($path, $target) {
+            $endpoint = "https://content.dropboxapi.com/2/files/get_preview";
+            $headers = array(
+                "Dropbox-API-Arg: {\"path\": \"$path\"}"
+            );
+            $returnData = postRequest($endpoint, $headers, '', FALSE);
+            // check for errors
+            $eData = json_decode($returnData, true);
+            if (isset($eData["error"])) {
+                return $eData["error_summary"];
+            }
+            else {
+                $file = fopen($target, 'w');
+                fwrite($file, $data);
+                fclose($file);
+            }
+        }
+        
+        /**
+        * gets a termporary link to stream content of a file
+        * the link expires in 4 hours, after which it will return 410 GONE
+        */
+        public function get_temporary_link($path) {
+            $endpoint = "https://api.dropboxapi.com/2/files/get_temporary_link";
+            $headers = array(
+                "Content-Type: application/json"
+            );
+            $postdata = json_encode(array( "path" => $path ));
+            $returnData = postRequest($endpoint, $headers, $postdata);
+            if (isset($returnData["error"])) {
+                return $returnData["error_summary"];
+            }
+            else {
+                return $returnData;
+            }
+        }
+        
+        /**
+        * gets the thumbnail for an image
+        * $format: jpeg or png
+        * $size: default w64h64
+        */
+        public function get_preview($path, $target, $format = 'jpeg', $size = 'w64h64') {
+            $endpoint = "https://content.dropboxapi.com/2/files/get_thumbnail";
+            $headers = array(
+                "Dropbox-API-Arg: {\"path\": \"$path\", \"format\": \"$format\", \"size\": \"$size\"}"
+            );
+            $returnData = postRequest($endpoint, $headers, '', FALSE);
+            // check for errors
+            $eData = json_decode($returnData, true);
+            if (isset($eData["error"])) {
+                return $eData["error_summary"];
+            }
+            else {
+                $file = fopen($target, 'w');
+                fwrite($file, $data);
+                fclose($file);
+            }
+        }
+        
+        /**
+        * gets the contents of a folder
+        */
+        public function list_folder($path, $recursive = FALSE, $include_media_info = FALSE, $include_has_explicit_shared_members = FALSE) {
             $endpoint = "https://api.dropboxapi.com/2/files/list_folder";
             $headers = array(
                 "Content-Type: application/json",
             );
             $postdata = json_encode(array( "path" => $path, "recursive" => $recursive, "include_media_info" => $include_media_info, "include_has_explicit_shared_members" => $include_has_explicit_shared_members));
+            $returnData = postRequest($endpoint, $headers, $postdata);
+            if (isset($returnData["error"])) {
+                return $returnData["error_summary"];
+            }
+            else {
+                return $returnData;
+            }
+        }
+        
+        /**
+        * continue listing the contents of a folder given a cursor from list_folder or
+        *     a previous call of list_folder_continue
+        */
+        public function list_folder_continue($cursor) {
+            $endpoint = "https://api.dropboxapi.com/2/files/list_folder/continue";
+            $headers = array(
+                "Content-Type: application/json",
+            );
+            $postdata = json_encode(array( "cursor" => $cursor));
+            $returnData = postRequest($endpoint, $headers, $postdata);
+            if (isset($returnData["error"])) {
+                return $returnData["error_summary"];
+            }
+            else {
+                return $returnData;
+            }
+        }
+        
+        /**
+        * gets the latest cursor for a folder
+        */
+        public function list_folder($path, $recursive = FALSE, $include_media_info = FALSE, $include_deleted = FALSE, $include_has_explicit_shared_members = FALSE) {
+            $endpoint = "https://api.dropboxapi.com/2/files/list_folder/get_latest_cursor";
+            $headers = array(
+                "Content-Type: application/json",
+            );
+            $postdata = json_encode(array( "path" => $path, "recursive" => $recursive, "include_media_info" => $include_media_info, "include_deleted" => $include_deleted, "include_has_explicit_shared_members" => $include_has_explicit_shared_members));
+            $returnData = postRequest($endpoint, $headers, $postdata);
+            if (isset($returnData["error"])) {
+                return $returnData["error_summary"];
+            }
+            else {
+                return $returnData;
+            }
+        }
+        
+        /**
+        * A longpoll endpoint to wait for changes on an account. 
+        * In conjunction with list_folder/continue, this call gives you a low-latency way to monitor an account for file changes.
+        * The connection will block until there are changes available or a timeout occurs. This endpoint is useful mostly for client-side apps.
+        */
+        public function list_folder_longpoll($cursor, $timeout = 30) {
+            $endpoint = "https://notify.dropboxapi.com/2/files/list_folder/longpoll";
+            $headers = array(
+                "Content-Type: application/json",
+            );
+            $postdata = json_encode(array( "cursor" => $cursor, "timeout" => $timeout));
+            $returnData = postRequest($endpoint, $headers, $postdata);
+            if (isset($returnData["error"])) {
+                return $returnData["error_summary"];
+            }
+            else {
+                return $returnData;
+            }
+        }
+        
+        /**
+        * returns the revisions of a file
+        */
+        public function list_revisions($path, $limit = 10) {
+            $endpoint = "https://api.dropboxapi.com/2/files/list_revisions";
+            $headers = array(
+                "Content-Type: application/json",
+            );
+            $postdata = json_encode(array( "path" => $path, "limit" => $limit));
             $returnData = postRequest($endpoint, $headers, $postdata);
             if (isset($returnData["error"])) {
                 return $returnData["error_summary"];
@@ -288,6 +449,15 @@
                 return $returnData["path_display"];
             }
         }
+        
+        // ***       *      ***   ****  ***
+        // *  *     * *     *  *  *     *  *
+        // ***     *****    ***   ***   ***
+        // *      *     *   *     *     *  *
+        // *     *       *  *     ****  *   *
+        
+        
+        
         
         //  ****  *   *      *      ***    *****  *   *   ***
         // *      *   *     * *     *  *     *    **  *  *

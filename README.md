@@ -3,7 +3,7 @@ PHP SDK for Dropbox built with the v2 API
 
 *IN DEVELOPMENT*
 ================
-*Last update: 7/26/2017*
+*Last update: 7/28/2017*
 
 **Bolded** items will not be implemented.
 
@@ -27,15 +27,15 @@ PHP SDK for Dropbox built with the v2 API
 - [x] /delete_batch/check
 - [x] /delete_v2
 - [x] /download
-- [ ] /get_metadata
-- [ ] /get_preview
-- [ ] /get_temporary_link
-- [ ] /get_thumbnail
+- [x] /get_metadata
+- [x] /get_preview
+- [x] /get_temporary_link
+- [x] /get_thumbnail
 - [x] /list_folder
-- [ ] /list_folder/continue
-- [ ] /list_folder/get_latest_cursor
-- [ ] /list_folder/longpoll
-- [ ] /list_revisions
+- [x] /list_folder/continue
+- [x] /list_folder/get_latest_cursor
+- [x] /list_folder/longpoll
+- [x] /list_revisions
 - [ ] /move *DEPRECATED BY /move_v2*
 - [ ] /move_batch
 - [ ] /move_batch/check
