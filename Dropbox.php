@@ -613,13 +613,131 @@
             $postdata = file_get_contents($file_path);
             
             $returnData = postRequest($endpoint, $headers, $postdata);
-            if ($returnData["error"] !== null) {
+            if (isset($returnData["error"])) {
                 return $returnData["error_summary"];
             }
             else {
                 return $returnData["path_display"];
             }
         }
+        
+        /**
+        * append more data to an upload session.
+        * a single request should not upload more than 150 MB.
+        * DEPRECATED by upload_session/append_v2
+        */
+        public function upload_session_append($session_id, $offset, $file_path) {
+            $endpoint = "https://content.dropboxapi.com/2/files/upload_session/append";
+            $headers = array(
+                "Content-Type: application/octet-stream",
+                "Dropbox-API-Arg: {\"session_id\": \"$session_id\", \"offset\": \"$offset\"}"       
+            );
+            $postdata = file_get_contents($file_path);
+            $returnData = postRequest($endpoint, $headers, $postdata);
+            if (isset($returnData["error"])) {
+                return $returnData["error_summary"];
+            }
+            else {
+                return true;
+            }
+        }
+        
+        /**
+        * append more data to an upload session.
+        * a single request should not upload more than 150 MB.
+        */
+        public function upload_session_append_v2($session_id, $offset, $file_path, $close = FALSE) {
+            $endpoint = "https://content.dropboxapi.com/2/files/upload_session/append_v2";
+            $headers = array(
+                "Content-Type: application/octet-stream",
+                "Dropbox-API-Arg: {\"cursor\": {\"session_id\": \"$session_id\", \"offset\": \"$offset\"}, \"close\": $close}"
+            );
+            $postdata = file_get_contents($file_path);
+            $returnData = postRequest($endpoint, $headers, $postdata);
+            if (isset($returnData["error"])) {
+                return $returnData["error_summary"];
+            }
+            else {
+                return true;
+            }
+        }
+        
+        public function upload_session_finish($entry instanceof Entry) {
+            $endpoint = "https://content.dropboxapi.com/2/files/upload_session/finish";
+            $headers = array(
+                "Content-Type" => 'application/octet-stream',
+                "Dropbox-API-Arg" => $entry.toJson()
+            );
+            $headers = json_encode($headers);
+            $postdata = file_get_contents($file_path);
+            $returnData = postRequest($endpoint, $headers, $postdata);
+            if (isset($returnData["error"])) {
+                return $returnData["error_summary"];
+            }
+            else {
+                return $returnData;
+            }
+        }
+        
+        /**
+        * Finishes uploading a list of elements
+        * $entries contains a list of elements of type 'Entry'
+        * returns either completed response data or an async_job_id if the processing is asynchronous
+        */
+        public function finish_batch($entries) {
+            $endpoint = "https://api.dropboxapi.com/2/files/finish_batch";
+            $headers = array(
+                "Content-Type: application/json"
+            );
+            $postdata = json_encode(array( "entries" => $entries ));
+            $returnData = postRequest($endpoint, $headers, $postdata);
+            if (isset($returnData["error"])) {
+                return $returnData["error_summary"];
+            }
+            else {
+                return $returnData;
+            }
+        }
+        
+        /**
+        * Checks the progress of an asynchronous finish_batch operation
+        */
+        public function finish_batch_check($async_job_id) {
+            $endpoint = "https://api.dropboxapi.com/2/files/finish_batch/check";
+            $headers = array(
+                "Content-Type: application/json"
+            );
+            $postdata = json_encode(array( "async_job_id" => $async_job_id ));
+            $returnData = postRequest($endpoint, $headers, $postdata);
+            if (isset($returnData["error"])) {
+                return $returnData["error_summary"];
+            }
+            else {
+                return $returnData;
+            }
+        }
+        
+        /*
+        * starts an upload session, needed where the size of a file is greater than 150 MB
+        * can last up to 48 hours
+        */
+        public function upload_session_start($file_path, $close = false) {
+            $endpoint = "https://content.dropboxapi.com/2/files/upload_session/start";
+            $headers = array(
+                "Content-Type: application/octet-stream",
+                "Dropbox-API-Arg: {\"close\": $close}"
+            );
+            $postdata = file_get_contents($file_path);
+            $returnData = postRequest($endpoint, $headers, $postdata);
+            if (isset($returnData["error"])) {
+                return $returnData["error_summary"];
+            }
+            else {
+                return true;
+            }
+            
+        }
+        
         
         // ***       *      ***   ****  ***
         // *  *     * *     *  *  *     *  *
@@ -647,7 +765,7 @@
             );
             $postdata = json_encode(array( "path" => $path, "settings" => array( "requested_visibility" => "public")));
             $returnData = postRequest($endpoint, $headers, $postdata);
-            if ($returnData["error"] !== null) {
+            if (isset($returnData["error"])) {
                 return $returnData["error_summary"];
             }
             else {
@@ -688,12 +806,37 @@
             );
             $postdata = json_encode(array( "path" => $path, "include_media_info" => FALSE, "include_deleted" => FALSE, "include_has_explicit_shared_members" => false));
             $returnData = postRequest($endpoint, $headers, $postdata);
-            if ($returnData["error"] !== null) {
+            if (isset($returnData["error"])) {
                 return FALSE;
             }
             else {
                 return TRUE;
             }
+        }
+    }
+
+    class Entry {
+        public $cursor;
+        public $commit;
+        
+        public function __construct($session_id, $offset, $path, $mode = 'add', $autorename = false, $mute = false) {
+            $cursor = array(
+                "sesson_id" => $session_id,
+                "offset" => $offset
+            );
+            $commit = array({
+                "path" => $path,
+                "mode" => $mode,
+                "autorename" => $autorename,
+                "mute" => $mute
+            });
+        }
+        
+        public function toJson() {
+            return json_encode(array(
+                "cursor" => $cursor,
+                "commit" => $commit
+            ))
         }
     }
 

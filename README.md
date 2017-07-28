@@ -51,12 +51,12 @@ PHP SDK for Dropbox built with the v2 API
 - [x] /save_url/check_job_status
 - [x] /search
 - [x] /upload
-- [ ] /upload_session/append *DEPRECATED BY /upload_session/append_v2*
-- [ ] /upload_session/append_v2
-- [ ] /upload_session/finish
-- [ ] /upload_session/finish_batch
-- [ ] /upload_session/finish_batch/check
-- [ ] /upload_session/start
+- [x] /upload_session/append *DEPRECATED BY /upload_session/append_v2*
+- [x] /upload_session/append_v2
+- [x] /upload_session/finish
+- [x] /upload_session/finish_batch
+- [x] /upload_session/finish_batch/check
+- [x] /upload_session/start
 
 ### paper
 - [ ] /docs/archive
