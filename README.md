@@ -3,7 +3,7 @@ PHP SDK for Dropbox built with the v2 API
 
 *IN DEVELOPMENT*
 ================
-*Last update: 7/28/2017*
+*Last update: 7/31/2017*
 
 **Bolded** items will not be implemented.
 
@@ -59,8 +59,8 @@ PHP SDK for Dropbox built with the v2 API
 - [x] /upload_session/start
 
 ### paper
-- [ ] /docs/archive
-- [ ] /docs/download
+- [x] /docs/archive
+- [x] /docs/download
 - [ ] /docs/folder_users/list
 - [ ] /docs/folder_users/list/continue
 - [ ] /docs/get_folder_info
