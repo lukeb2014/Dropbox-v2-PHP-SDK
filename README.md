@@ -60,19 +60,20 @@ PHP SDK for Dropbox built with the v2 API
 
 ### paper
 - [x] /docs/archive
+- [x] /docs/create
 - [x] /docs/download
-- [ ] /docs/folder_users/list
-- [ ] /docs/folder_users/list/continue
-- [ ] /docs/get_folder_info
-- [ ] /docs/list
-- [ ] /docs/list/continue
-- [ ] /docs/permanently_delete
-- [ ] /docs/sharing_policy/get
-- [ ] /docs/sharing_policy/set
-- [ ] /docs/users/add
-- [ ] /docs/users/list
-- [ ] /docs/users/list/continue
-- [ ] /docs/users/remove
+- [x] /docs/folder_users/list
+- [x] /docs/folder_users/list/continue
+- [x] /docs/get_folder_info
+- [x] /docs/list
+- [x] /docs/list/continue
+- [x] /docs/permanently_delete
+- [x] /docs/sharing_policy/get
+- [x] /docs/sharing_policy/set
+- [x] /docs/users/add
+- [x] /docs/users/list
+- [x] /docs/users/list/continue
+- [x] /docs/users/remove
 
 ### sharing
 - [ ] /add_file_member
