@@ -76,8 +76,8 @@ PHP SDK for Dropbox built with the v2 API
 - [x] /docs/users/remove
 
 ### sharing
-- [ ] /add_file_member
-- [ ] /add_folder_member
+- [x] /add_file_member
+- [x] /add_folder_member
 - [ ] /change_file_member_access *DEPRECATED BY /update_file_member*
 - [ ] /check_job_status
 - [ ] /check_remove_member_job_status
