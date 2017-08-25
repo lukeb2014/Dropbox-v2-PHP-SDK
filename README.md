@@ -78,19 +78,19 @@ PHP SDK for Dropbox built with the v2 API
 ### sharing
 - [x] /add_file_member
 - [x] /add_folder_member
-- [ ] /change_file_member_access *DEPRECATED BY /update_file_member*
-- [ ] /check_job_status
-- [ ] /check_remove_member_job_status
-- [ ] /check_share_job_status
-- [ ] /create_shared_link *DEPRECATED BY /create_shared_link_with_settings*
+- [x] /change_file_member_access *DEPRECATED BY /update_file_member*
+- [x] /check_job_status
+- [x] /check_remove_member_job_status
+- [x] /check_share_job_status
+- [x] /create_shared_link *DEPRECATED BY /create_shared_link_with_settings*
 - [x] /create_shared_link_with_settings
-- [ ] /get_file_metadata
-- [ ] /get_file_metadata/batch
-- [ ] /get_folder_metadata
-- [ ] /get_shared_link_file
-- [ ] /get_shared_link_metadata
-- [ ] /get_shared_links *DEPRECATED BY /list_shared_links*
-- [ ] /list_file_members
+- [x] /get_file_metadata
+- [x] /get_file_metadata/batch
+- [x] /get_folder_metadata
+- [x] /get_shared_link_file
+- [x] /get_shared_link_metadata
+- [x] /get_shared_links *DEPRECATED BY /list_shared_links*
+- [x] /list_file_members
 - [ ] /list_file_members/batch
 - [ ] /list_file_members/continue
 - [ ] /list_folder_members
