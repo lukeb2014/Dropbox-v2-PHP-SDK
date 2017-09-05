@@ -91,36 +91,45 @@ PHP SDK for Dropbox built with the v2 API
 - [x] /get_shared_link_metadata
 - [x] /get_shared_links *DEPRECATED BY /list_shared_links*
 - [x] /list_file_members
-- [ ] /list_file_members/batch
-- [ ] /list_file_members/continue
-- [ ] /list_folder_members
-- [ ] /list_folder_members/continue
-- [ ] /list_folders
-- [ ] /list_folders/continue
-- [ ] /list_mountable_folders
-- [ ] /list_mountable_folders/continue
-- [ ] /list_received_files
-- [ ] /list_received_files/continue
-- [ ] /list_shared_links
-- [ ] /modify_shared_link_settings
-- [ ] /mount_folder
-- [ ] /relinquish_file_membership
-- [ ] /relinquish_folder_membership
-- [ ] /remove_file_member *DEPRECATED BY /remove_file_member_2
-- [ ] /remove_file_member_2
-- [ ] /remove_folder_member
-- [ ] /revoke_shared_link
-- [ ] /share_folder
-- [ ] /transfer_folder
-- [ ] /unmount_folder
-- [ ] /unshare_file
-- [ ] /unshare_folder
-- [ ] /update_file_member
-- [ ] /update_folder_member
-- [ ] /update_folder_policy
+- [x] /list_file_members/batch
+- [x] /list_file_members/continue
+- [x] /list_folder_members
+- [x] /list_folder_members/continue
+- [x] /list_folders
+- [x] /list_folders/continue
+- [x] /list_mountable_folders
+- [x] /list_mountable_folders/continue
+- [x] /list_received_files
+- [x] /list_received_files/continue
+- [x] /list_shared_links
+- [x] /modify_shared_link_settings
+- [x] /mount_folder
+- [x] /relinquish_file_membership
+- [x] /relinquish_folder_membership
+- [x] /remove_file_member *DEPRECATED BY /remove_file_member_2*
+- [x] /remove_file_member_2
+- [x] /remove_folder_member
+- [x] /revoke_shared_link
+- [x] /share_folder
+- [x] /transfer_folder
+- [x] /unmount_folder
+- [x] /unshare_file
+- [x] /unshare_folder
+- [x] /update_file_member
+- [x] /update_folder_member
+- [x] /update_folder_policy
 
 ### users
-- [ ] /get_account
-- [ ] /get_account_batch
-- [ ] /get_current_account
-- [ ] /get_space_usage
+- [x] /get_account
+- [x] /get_account_batch
+- [x] /get_current_account
+- [x] /get_space_usage
+
+----------------------
+## Next Steps
+- Test, test, test...
+- `/token/from_oauth1` needs extra care due to change in `Authorization` header
+- Check loading times
+- Perhaps make more object-oriented
+- Build more helper functions and classes to do common tasks
+- Implement with [Composer](https://getcomposer.org/)
