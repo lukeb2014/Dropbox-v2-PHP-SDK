@@ -8,8 +8,8 @@ PHP SDK for Dropbox built with the v2 API
 **Bolded** items will not be implemented.
 
 ### auth
-- [ ] /token/from_oauth1
-- [ ] /token/revoke
+- [x] /token/from_oauth1
+- [x] /token/revoke
 
 ### files
 - [ ] **/alpha/get_metadata** *PREVIEW*
