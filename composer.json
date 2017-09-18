@@ -1,0 +1,7 @@
+{
+    "name": "lukebaird/dropbox-v2-php-sdk",
+    "description": "A Dropbox SDK to work with the v2 API",
+    "require": {
+        "php": "^5.3.3 || ^7.0"
+    }
+}
