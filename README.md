@@ -3,7 +3,7 @@ PHP SDK for Dropbox built with the v2 API
 
 *IN DEVELOPMENT*
 ================
-*Last update: 9/5/2017*
+*Last update: 9/21/2017*
 
 **Bolded** items will not be implemented.
 
