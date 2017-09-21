@@ -1,7 +1,13 @@
 {
     "name": "lukebaird/dropbox-v2-php-sdk",
+    "license": "MIT",
     "description": "A Dropbox SDK to work with the v2 API",
     "require": {
         "php": "^5.3.3 || ^7.0"
+    },
+    "autoload" {
+        "psr-0" : {
+            "Dropbox\\": "sdk/"
+        }
     }
 }

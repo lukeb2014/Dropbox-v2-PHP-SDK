@@ -9,6 +9,8 @@
         include 'Sharing.php';
         include 'Users.php';
         
+        use Dropbox;
+        
         public function __construct($accesstoken) {
             $this->token = $accesstoken;
         }

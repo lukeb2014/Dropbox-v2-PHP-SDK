@@ -1,4 +1,5 @@
 <?php
+    namespace Dropbox;
     
     include 'Dropbox.php';
     include 'Misc.php';
