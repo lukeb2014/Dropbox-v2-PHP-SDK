@@ -1,19 +1,16 @@
 <?php
-    namespace Dropbox;
+    namespace Dropbox\Dropbox;
 
     use Dropbox\Dropbox;
 
-    class Misc {
-        private $token;
-        
+    class Misc {        
         // *   *  *****   ****   ****
         // ** **    *    *      *
         // * * *    *     ***   *
         // *   *    *        *  *      
         // *   *  *****  ****    ****  *
         
-        public function __construct($accesstoken) {
-            $this->token = $accesstoken;
+        public function __construct() {
         }
         
         public function isValidPath($path) {

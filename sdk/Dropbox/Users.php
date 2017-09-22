@@ -4,8 +4,6 @@
     use Dropbox\Dropbox;
 
     class Users {
-        private $token;        
-        
         // *   *    ****  ****  ***     ****
         // *   *   *      *     *  *   *    
         // *   *    ***   ***   ***     *** 
@@ -64,8 +62,7 @@
         // *   *    *        *  *      
         // *   *  *****  ****    ****  *
         
-        public function __construct($accesstoken) {
-            $this->token = $accesstoken;
+        public function __construct() {
         }
     }
 

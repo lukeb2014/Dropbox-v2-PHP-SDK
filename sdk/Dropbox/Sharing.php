@@ -3,9 +3,7 @@
     
     use Dropbox\Dropbox;
 
-    class Sharing {
-        private $token;
-        
+    class Sharing {        
         //  ****  *   *      *      ***    *****  *   *   ***
         // *      *   *     * *     *  *     *    **  *  *
         //  ***   *****    *****    ***      *    * * *  *  **
@@ -716,8 +714,7 @@
         // *   *    *        *  *      
         // *   *  *****  ****    ****  *
         
-        public function __construct($accesstoken) {
-            $this->token = $accesstoken;
+        public function __construct() {
         }
         
     }
