@@ -1,8 +1,7 @@
 <?php
     namespace Dropbox;
     
-    include 'Dropbox.php';
-    include 'Misc.php';
+    use Dropbox\Dropbox;
 
     class Sharing {
         private $token;
@@ -22,9 +21,9 @@
             $headers = array(
                 "Content-Type: application/json"
             );
-            $postarray = array( "file" => $file, "members" => $members, "quiet" = $quiet, "access_level" = $access_level, "add_mesage_as_comment" => $add_message_as_comment );
+            $postarray = array( "file" => $file, "members" => $members, "quiet" => $quiet, "access_level" => $access_level, "add_mesage_as_comment" => $add_message_as_comment );
             if (is_null($custom_message) == FALSE)
-                array_push($postarray, "custom_message" => $custom_message);
+                $postarray["custom_message"] = $custom_message;
             $postdata = json_encode($postarray);
             $returnData = Dropbox::postRequest($endpoint, $headers, $postdata);
             if (isset($returnData["error"])) {
@@ -43,9 +42,9 @@
             $headers = array(
                 "Content-Type: application/json"
             );
-            $postarray = array( "file" => $file, "members" => $members, "quiet" = $quiet );
+            $postarray = array( "file" => $file, "members" => $members, "quiet" => $quiet );
             if (is_null($custom_message) == FALSE)
-                array_push($postarray, "custom_message" => $custom_message);
+                $postarray["custom_message"] = $custom_message;
             $postdata = json_encode($postarray);
             $returnData = Dropbox::postRequest($endpoint, $headers, $postdata);
             if (isset($returnData["error"])) {
@@ -218,10 +217,10 @@
             $endpoint = "https://api.dropboxapi.com/2/sharing/get_file_metadata/batch";
             $data_array = array( "url" => $url);
             if (is_null($path) == FALSE) {
-                array_push($data_array, "path => $path");
+                $data_array["path"] = $path;
             }
             if (is_null($link_password) == FALSE) {
-                array(push($data_array, "link_password => $link_password"))
+                $data_array["link_password"] = $link_password;
             }
             $data_array = json_encode($data_array);
             $headers = array(
@@ -250,7 +249,7 @@
                 array_push($data_array, "path => $path");
             }
             if (is_null($link_password) == FALSE) {
-                array(push($data_array, "link_password => $link_password"))
+                $data_array["link_password"] = $link_password;
             }
             $postdata = json_encode($data_array);
             $returnData = Dropbox::postRequest($endpoint, $headers, $postdata);
@@ -283,7 +282,7 @@
             $headers = array(
                 "Content-Type: application/json"
             );
-            $postdata = json_encode(array( "file" => $file, "include_inherited" => $include_inherited, "limit" => $limit, "actions" = $actions ));
+            $postdata = json_encode(array( "file" => $file, "include_inherited" => $include_inherited, "limit" => $limit, "actions" => $actions ));
             $returnData = Dropbox::postRequest($endpoint, $headers, $postdata);
             if (isset($returnData["error"])) {
                 return $returnData["error_summary"];
@@ -561,7 +560,7 @@
         * removes a specified member from the folder
         * @param member: contains an email/dropbox_id and/or a tag specifying it
         */        
-        public function remove_file_member_2($shared_folder_id, $member, $leave_a_copy = FALSE) {
+        public function remove_folder_member($shared_folder_id, $member, $leave_a_copy = FALSE) {
             $endpoint = "https://api.dropboxapi.com/2/sharing/remove_folder_member";
             $headers = array(
                 "Content-Type: application/json"
@@ -596,7 +595,7 @@
             $headers = array(
                 "Content-Type: application/json"
             );
-            $postdata = json_encode(array( "path" => $path, "force_async" = $force_async, "acl_update_policy" => $acl_update_policy, "member_policy" => $member_policy, "shared_link_policy" => $shared_link_policy, "view_info_policy" => $viewer_info_policy, "actions" => $actions, "link_settings" => $link_settings));
+            $postdata = json_encode(array( "path" => $path, "force_async" => $force_async, "acl_update_policy" => $acl_update_policy, "member_policy" => $member_policy, "shared_link_policy" => $shared_link_policy, "view_info_policy" => $viewer_info_policy, "actions" => $actions, "link_settings" => $link_settings));
             $returnData = Dropbox::postRequest($endpoint, $headers, $postdata);
             if (isset($returnData["error"])) {
                 return $returnData["error_summary"];

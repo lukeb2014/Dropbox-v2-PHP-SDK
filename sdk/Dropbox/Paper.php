@@ -1,8 +1,7 @@
 <?php
     namespace Dropbox;
     
-    include 'Dropbox.php';
-    include 'Misc.php';
+    use Dropbox\Dropbox;
 
     class Paper {
         private $token;
@@ -42,7 +41,7 @@
                 $Dropbox_API_Arg = "{\"import_format\": $import_format}";
             }
             else {
-                $Dropbox_API_Arg = "{\"import_format\": $import_format, \"parent_folder_id\": $parent_folder_id}"
+                $Dropbox_API_Arg = "{\"import_format\": $import_format, \"parent_folder_id\": $parent_folder_id}";
             }
             $headers = array(
                 "Content-Type: application/octet-stream",

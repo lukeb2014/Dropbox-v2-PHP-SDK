@@ -1,8 +1,7 @@
 <?php
     namespace Dropbox;
     
-    include 'Dropbox.php';
-    include 'Misc.php';
+    use Dropbox\Dropbox;
 
     class Auth {
         private $token;
@@ -31,7 +30,7 @@
             }
         }
         
-        public function from_oauth1() {
+        public function revoke() {
             $endpoint = "https://api.dropboxapi.com/2/token/revoke";
             $headers = array();
             $postdata = json_encode(array());

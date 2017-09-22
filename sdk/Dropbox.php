@@ -1,15 +1,15 @@
 <?php
+    namespace Dropbox;
+    
+    use Dropbox\Auth;
+    use Dropbox\Files;
+    use Dropbox\Paper;
+    use Dropbox\Misc;
+    use Dropbox\Sharing;
+    use Dropbox\Users;
+
     class Dropbox {
         private $token;
-        
-        include 'Auth.php'
-        include 'Files.php';
-        include 'Paper.php';
-        include 'Misc.php';
-        include 'Sharing.php';
-        include 'Users.php';
-        
-        use Dropbox;
         
         public function __construct($accesstoken) {
             $this->token = $accesstoken;

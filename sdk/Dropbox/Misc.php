@@ -1,6 +1,8 @@
 <?php
     namespace Dropbox;
-    include 'Dropbox.php';
+
+    use Dropbox\Dropbox;
+
     class Misc {
         private $token;
         
@@ -39,19 +41,19 @@
                 "sesson_id" => $session_id,
                 "offset" => $offset
             );
-            $commit = array({
+            $commit = array(
                 "path" => $path,
                 "mode" => $mode,
                 "autorename" => $autorename,
                 "mute" => $mute
-            });
+            );
         }
         
         public function toJson() {
             return json_encode(array(
                 "cursor" => $cursor,
                 "commit" => $commit
-            ))
+            ));
         }
     }
 

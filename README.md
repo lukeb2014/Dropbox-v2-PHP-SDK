@@ -3,7 +3,13 @@ PHP SDK for Dropbox built with the v2 API
 
 *IN DEVELOPMENT*
 ================
-*Last update: 9/21/2017*
+*Last update: 9/22/2017*
+
+## Next Steps
+- Implement with [Composer](https://getcomposer.org/)
+- Build more helper functions and classes to do common tasks
+- `/token/from_oauth1` needs extra care due to change in `Authorization` header
+----------------------
 
 **Bolded** items will not be implemented.
 
@@ -124,12 +130,3 @@ PHP SDK for Dropbox built with the v2 API
 - [x] /get_account_batch
 - [x] /get_current_account
 - [x] /get_space_usage
-
-----------------------
-## Next Steps
-- Test, test, test...
-- `/token/from_oauth1` needs extra care due to change in `Authorization` header
-- Check loading times
-- Perhaps make more object-oriented
-- Build more helper functions and classes to do common tasks
-- Implement with [Composer](https://getcomposer.org/)

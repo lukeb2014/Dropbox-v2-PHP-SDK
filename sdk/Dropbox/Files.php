@@ -1,8 +1,9 @@
 <?php
     namespace Dropbox;
     
-    include 'Dropbox.php';
-    include 'Misc.php';
+    use Dropbox\Entry;
+    use Dropbox\Dropbox;
+
     class Files {
         private $token;
         
@@ -16,12 +17,12 @@
         * Copies a file from one location to another
         * 
         */
-        public function copy($from_path, $to_path, $allow_shared_folder = FALSE, $autorename = FALSE, allow_ownership_transfer = FALSE) {
+        public function copy($from_path, $to_path, $allow_shared_folder = FALSE, $autorename = FALSE, $allow_ownership_transfer = FALSE) {
             $endpoint = "https://api.dropboxapi.com/2/files/copy";
             $headers = array(
                 "Content-Type: application/json"
             );
-            $postdata = json_encode(array( "from_path" => $from_path, "to_path" => $to_path, "allow_shared_folder" => $allow_shared_folder, "autorename" => $autorename, "allow_ownership_transfer" = $allow_ownership_transfer));
+            $postdata = json_encode(array( "from_path" => $from_path, "to_path" => $to_path, "allow_shared_folder" => $allow_shared_folder, "autorename" => $autorename, "allow_ownership_transfer" => $allow_ownership_transfer));
             $returnData = Dropbox::postRequest($endpoint, $headers, $postdata);
             if (isset($returnData["error"])) {
                 return $returnData["error_summary"];
@@ -36,12 +37,12 @@
         * $entries contains a list of RelocationPath objects (objects with a "from_path" value and a "to_path" value)
         * returns either completed response data or an async_job_id if the processing is asynchronous
         */
-        public function copy_batch($entries, $allow_shared_folder = FALSE, $autorename = FALSE, allow_ownership_transfer = FALSE) {
+        public function copy_batch($entries, $allow_shared_folder = FALSE, $autorename = FALSE, $allow_ownership_transfer = FALSE) {
             $endpoint = "https://api.dropboxapi.com/2/files/copy_batch";
             $headers = array(
                 "Content-Type: application/json"
             );
-            $postdata = json_encode(array( "entries" => $entries, "allow_shared_folder" => $allow_shared_folder, "autorename" => $autorename, "allow_ownership_transfer" = $allow_ownership_transfer));
+            $postdata = json_encode(array( "entries" => $entries, "allow_shared_folder" => $allow_shared_folder, "autorename" => $autorename, "allow_ownership_transfer" => $allow_ownership_transfer));
             $returnData = Dropbox::postRequest($endpoint, $headers, $postdata);
             if (isset($returnData["error"])) {
                 return $returnData["error_summary"];
@@ -111,12 +112,12 @@
         * Copies a file from one location to another
         * 
         */
-        public function copy_v2($from_path, $to_path, $allow_shared_folder = FALSE, $autorename = FALSE, allow_ownership_transfer = FALSE) {
+        public function copy_v2($from_path, $to_path, $allow_shared_folder = FALSE, $autorename = FALSE, $allow_ownership_transfer = FALSE) {
             $endpoint = "https://api.dropboxapi.com/2/files/copy_v2";
             $headers = array(
                 "Content-Type: application/json"
             );
-            $postdata = json_encode(array( "from_path" => $from_path, "to_path" => $to_path, "allow_shared_folder" => $allow_shared_folder, "autorename" => $autorename, "allow_ownership_transfer" = $allow_ownership_transfer));
+            $postdata = json_encode(array( "from_path" => $from_path, "to_path" => $to_path, "allow_shared_folder" => $allow_shared_folder, "autorename" => $autorename, "allow_ownership_transfer" => $allow_ownership_transfer));
             $returnData = Dropbox::postRequest($endpoint, $headers, $postdata);
             if (isset($returnData["error"])) {
                 return $returnData["error_summary"];
@@ -220,7 +221,7 @@
         * deletes a file or folder at a given path
         * 
         */
-        public function delete($path) {
+        public function delete_v2($path) {
             $endpoint = "https://api.dropboxapi.com/2/files/delete_v2";
             $headers = array(
                 "Content-Type: application/json"
@@ -312,7 +313,7 @@
         * $format: jpeg or png
         * $size: default w64h64
         */
-        public function get_preview($path, $target, $format = 'jpeg', $size = 'w64h64') {
+        public function get_thumbnail($path, $target, $format = 'jpeg', $size = 'w64h64') {
             $endpoint = "https://content.dropboxapi.com/2/files/get_thumbnail";
             $headers = array(
                 "Dropbox-API-Arg: {\"path\": \"$path\", \"format\": \"$format\", \"size\": \"$size\"}"
@@ -370,7 +371,7 @@
         /**
         * gets the latest cursor for a folder
         */
-        public function list_folder($path, $recursive = FALSE, $include_media_info = FALSE, $include_deleted = FALSE, $include_has_explicit_shared_members = FALSE) {
+        public function get_latest_cursor($path, $recursive = FALSE, $include_media_info = FALSE, $include_deleted = FALSE, $include_has_explicit_shared_members = FALSE) {
             $endpoint = "https://api.dropboxapi.com/2/files/list_folder/get_latest_cursor";
             $headers = array(
                 "Content-Type: application/json",
@@ -427,12 +428,12 @@
         * moves a file from one location to another
         * DEPRECATED by move_v2
         */
-        public function move($from_path, $to_path, $allow_shared_folder = FALSE, $autorename = FALSE, allow_ownership_transfer = FALSE) {
+        public function move($from_path, $to_path, $allow_shared_folder = FALSE, $autorename = FALSE, $allow_ownership_transfer = FALSE) {
             $endpoint = "https://api.dropboxapi.com/2/files/move";
             $headers = array(
                 "Content-Type: application/json"
             );
-            $postdata = json_encode(array( "from_path" => $from_path, "to_path" => $to_path, "allow_shared_folder" => $allow_shared_folder, "autorename" => $autorename, "allow_ownership_transfer" = $allow_ownership_transfer));
+            $postdata = json_encode(array( "from_path" => $from_path, "to_path" => $to_path, "allow_shared_folder" => $allow_shared_folder, "autorename" => $autorename, "allow_ownership_transfer" => $allow_ownership_transfer));
             $returnData = Dropbox::postRequest($endpoint, $headers, $postdata);
             if (isset($returnData["error"])) {
                 return $returnData["error_summary"];
@@ -447,12 +448,12 @@
         * $entries contains a list of RelocationPath objects (objects with a "from_path" value and a "to_path" value)
         * returns either completed response data or an async_job_id if the processing is asynchronous
         */
-        public function move_batch($entries, $allow_shared_folder = FALSE, $autorename = FALSE, allow_ownership_transfer = FALSE) {
+        public function move_batch($entries, $allow_shared_folder = FALSE, $autorename = FALSE, $allow_ownership_transfer = FALSE) {
             $endpoint = "https://api.dropboxapi.com/2/files/move_batch";
             $headers = array(
                 "Content-Type: application/json"
             );
-            $postdata = json_encode(array( "entries" => $entries, "allow_shared_folder" => $allow_shared_folder, "autorename" => $autorename, "allow_ownership_transfer" = $allow_ownership_transfer));
+            $postdata = json_encode(array( "entries" => $entries, "allow_shared_folder" => $allow_shared_folder, "autorename" => $autorename, "allow_ownership_transfer" => $allow_ownership_transfer));
             $returnData = Dropbox::postRequest($endpoint, $headers, $postdata);
             if (isset($returnData["error"])) {
                 return $returnData["error_summary"];
@@ -484,12 +485,12 @@
         /**
         * moves a file from one location to another
         */
-        public function move_v2($from_path, $to_path, $allow_shared_folder = FALSE, $autorename = FALSE, allow_ownership_transfer = FALSE) {
+        public function move_v2($from_path, $to_path, $allow_shared_folder = FALSE, $autorename = FALSE, $allow_ownership_transfer = FALSE) {
             $endpoint = "https://api.dropboxapi.com/2/files/move_v2";
             $headers = array(
                 "Content-Type: application/json"
             );
-            $postdata = json_encode(array( "from_path" => $from_path, "to_path" => $to_path, "allow_shared_folder" => $allow_shared_folder, "autorename" => $autorename, "allow_ownership_transfer" = $allow_ownership_transfer));
+            $postdata = json_encode(array( "from_path" => $from_path, "to_path" => $to_path, "allow_shared_folder" => $allow_shared_folder, "autorename" => $autorename, "allow_ownership_transfer" => $allow_ownership_transfer));
             $returnData = Dropbox::postRequest($endpoint, $headers, $postdata);
             if (isset($returnData["error"])) {
                 return $returnData["error_summary"];
@@ -557,7 +558,7 @@
         /**
         * Checks the progress of an asynchronous save_url operation
         */
-        public function move_batch_check($async_job_id) {
+        public function save_url_check_job_status($async_job_id) {
             $endpoint = "https://api.dropboxapi.com/2/files/save_url/check_job_status";
             $headers = array(
                 "Content-Type: application/json"
@@ -655,7 +656,10 @@
             }
         }
         
-        public function upload_session_finish($entry instanceof Entry) {
+        /*
+        * Entry must be an instanceof Entry (Dropbox\Entry)
+        */
+        public function upload_session_finish(Entry $entry) {
             $endpoint = "https://content.dropboxapi.com/2/files/upload_session/finish";
             $headers = array(
                 "Content-Type" => 'application/octet-stream',

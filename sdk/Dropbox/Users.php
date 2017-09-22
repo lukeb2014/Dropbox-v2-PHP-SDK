@@ -1,8 +1,7 @@
 <?php
     namespace Dropbox;
     
-    include 'Dropbox.php';
-    include 'Misc.php';
+    use Dropbox\Dropbox;
 
     class Users {
         private $token;        
