@@ -1,11 +1,9 @@
 <?php
-    namespace Dropbox;
+    namespace Dropbox\Dropbox;
     
     use Dropbox\Dropbox;
 
     class Paper {
-        private $token;
-        
         // ***       *      ***   ****  ***
         // *  *     * *     *  *  *     *  *
         // ***     *****    ***   ***   ***
@@ -310,8 +308,7 @@
         }
         
         
-        public function __construct($accesstoken) {
-            $this->token = $accesstoken;
+        public function __construct() {
         }
     }
 
