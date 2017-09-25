@@ -1,5 +1,5 @@
 <?php
-    namespace Dropbox;
+    namespace Dropbox\Dropbox;
     
     use Dropbox\Dropbox;
 
