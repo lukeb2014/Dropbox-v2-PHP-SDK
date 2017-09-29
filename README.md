@@ -25,21 +25,21 @@ PHP SDK for Dropbox built with the v2 API
 - [x] /token/revoke
 
 ### file_properties
-- [ ] /properties/add
-- [ ] /properties/overwrite
-- [ ] /properties/remove
-- [ ] /properties/search
-- [ ] /properties/update
-- [ ] /templates/add_for_user
-- [ ] /templates/get_for_user
-- [ ] /templates/list_for_user
-- [ ] /templates/update_for_user
+- [x] /properties/add
+- [x] /properties/overwrite
+- [x] /properties/remove
+- [x] /properties/search
+- [x] /properties/update
+- [x] /templates/add_for_user
+- [x] /templates/get_for_user
+- [x] /templates/list_for_user
+- [x] /templates/update_for_user
 
 ### file_requests
-- [ ] /create
-- [ ] /get
-- [ ] /list
-- [ ] /update
+- [x] /create
+- [x] /get
+- [x] /list
+- [x] /update
 
 ### files
 - [ ] **/alpha/get_metadata** *PREVIEW*
