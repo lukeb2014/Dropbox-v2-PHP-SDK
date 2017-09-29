@@ -5,7 +5,7 @@ PHP SDK for Dropbox built with the v2 API
 *Last update: 9/29/2017*
 
 ## Installation
-- Run `composer require lukebaird/dropbox-php-sdk-v2` in your project root
+- Run `composer require lukebaird/dropbox-v2-php-sdk` in your project root
 - You may need to change/add the `minimum-stability` value in your composer.json to `alpha` if you have not already done so.
 
 ### Additional info
