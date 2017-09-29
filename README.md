@@ -2,10 +2,18 @@
 PHP SDK for Dropbox built with the v2 API
 
 **IN DEVELOPMENT**
-*Last update: 9/22/2017*
+*Last update: 9/29/2017*
+
+## Installation
+- Run `composer require lukebaird/dropbox-php-sdk-v2` in your project root
+- You may need to change/add the `minimum-stability` value in your composer.json to `alpha` if you have not already done so.
+
+### Additional info
+- [Packagist.org link](https://packagist.org/packages/lukebaird/dropbox-v2-php-sdk)
+- Latest version: `v1.1.0-alpha`
 
 ## Next Steps
-- Implement with [Composer](https://getcomposer.org/)
+- Implement with [Composer](https://getcomposer.org/) (Packagist.org link:)
 - Build more helper functions and classes to do common tasks
 - `/token/from_oauth1` needs extra care due to change in `Authorization` header
 ----------------------
@@ -15,6 +23,23 @@ PHP SDK for Dropbox built with the v2 API
 ### auth
 - [x] /token/from_oauth1
 - [x] /token/revoke
+
+### file_properties
+- [ ] /properties/add
+- [ ] /properties/overwrite
+- [ ] /properties/remove
+- [ ] /properties/search
+- [ ] /properties/update
+- [ ] /templates/add_for_user
+- [ ] /templates/get_for_user
+- [ ] /templates/list_for_user
+- [ ] /templates/update_for_user
+
+### file_requests
+- [ ] /create
+- [ ] /get
+- [ ] /list
+- [ ] /update
 
 ### files
 - [ ] **/alpha/get_metadata** *PREVIEW*

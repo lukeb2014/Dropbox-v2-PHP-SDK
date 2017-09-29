@@ -3,6 +3,8 @@
     
     use Dropbox\Dropbox\Auth;
     use Dropbox\Dropbox\Files;
+    use Dropbox\Dropbox\FileProperties;
+    use Dropbox\Dropbox\FileRequests;
     use Dropbox\Dropbox\Paper;
     use Dropbox\Dropbox\Misc;
     use Dropbox\Dropbox\Sharing;
@@ -12,6 +14,8 @@
         private static $token;
         public $auth;
         public $files;
+        public $file_properties;
+        public $file_requests;
         public $paper;
         public $misc;
         public $sharing;
@@ -21,6 +25,8 @@
             self::$token = $accesstoken;
             $this->auth = new Auth();
             $this->files = new Files();
+            $this->file_properties = new FileProperties();
+            $this->file_requests = new FileRequests();
             $this->paper = new Paper();
             $this->misc = new Misc();
             $this->sharing = new Sharing();
