@@ -13,13 +13,14 @@
         //  *     *   *   *    *    *   *
         // *       *   ***     *    *   *
         
-        public function from_oauth1($oauth1_token, $oauth1_token_secret) {
+        /*
+        * Generates a new access token based on an oauth1 token, secret, app key, and app secret
+        * You can use $dropbox->updateAccessToken($token) to update the SDK with your new token
+        */
+        public function from_oauth1($oauth1_token, $oauth1_token_secret, $app_key, $app_secret) {
             $endpoint = "https://api.dropboxapi.com/2/token/from_oauth1";
-            $headers = array(
-                "Content-Type: application/json"
-            );
             $postdata = json_encode(array( "oauth1_token" => $oauth1_token, "oauth1_token_secret" => $oauth1_token_secret ));
-            $returnData = Dropbox::postRequest($endpoint, $headers, $postdata);
+            $returnData = Dropbox::oauth1Request($endpoint, $postdata, $app_token, $app_secret);
             if (isset($returnData["error"])) {
                 return $returnData["error_summary"];
             }
@@ -28,6 +29,9 @@
             }
         }
         
+        /*
+        * Revokes an access token
+        */
         public function revoke() {
             $endpoint = "https://api.dropboxapi.com/2/token/revoke";
             $headers = array();

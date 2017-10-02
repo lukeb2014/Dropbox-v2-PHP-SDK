@@ -1,21 +1,21 @@
-# Dropbox-PHP-SDK-v2
+# Dropbox-v2-PHP-SDK
 PHP SDK for Dropbox built with the v2 API
 
 **IN DEVELOPMENT**
-*Last update: 9/29/2017*
+*Last update: 10/1/2017*
 
 ## Installation
-- Run `composer require lukebaird/dropbox-php-sdk-v2` in your project root
-- You may need to change/add the `minimum-stability` value in your composer.json to `alpha` if you have not already done so.
+- Run `composer require lukebaird/dropbox-v2-php-sdk` in your project root
+- You may need to change/add the `minimum-stability` value in your composer.json to `beta` if you have not already done so.
 
 ### Additional info
 - [Packagist.org link](https://packagist.org/packages/lukebaird/dropbox-v2-php-sdk)
-- Latest version: `v1.1.0-alpha`
+- Latest version: `v1.0.0-beta`
 
-## Next Steps
-- Implement with [Composer](https://getcomposer.org/) (Packagist.org link:)
-- Build more helper functions and classes to do common tasks
-- `/token/from_oauth1` needs extra care due to change in `Authorization` header
+## Documentation
+- Documentation will be improved in the future. Check out [Example.php](Example.php) for basic usage.
+- [Dropbox API documentation](https://www.dropbox.com/developers/documentation/http/documentation)
+- You can look in the appropriate file to see usage.
 ----------------------
 
 **Bolded** items will not be implemented.
@@ -25,21 +25,21 @@ PHP SDK for Dropbox built with the v2 API
 - [x] /token/revoke
 
 ### file_properties
-- [ ] /properties/add
-- [ ] /properties/overwrite
-- [ ] /properties/remove
-- [ ] /properties/search
-- [ ] /properties/update
-- [ ] /templates/add_for_user
-- [ ] /templates/get_for_user
-- [ ] /templates/list_for_user
-- [ ] /templates/update_for_user
+- [x] /properties/add
+- [x] /properties/overwrite
+- [x] /properties/remove
+- [x] /properties/search
+- [x] /properties/update
+- [x] /templates/add_for_user
+- [x] /templates/get_for_user
+- [x] /templates/list_for_user
+- [x] /templates/update_for_user
 
 ### file_requests
-- [ ] /create
-- [ ] /get
-- [ ] /list
-- [ ] /update
+- [x] /create
+- [x] /get
+- [x] /list
+- [x] /update
 
 ### files
 - [ ] **/alpha/get_metadata** *PREVIEW*
@@ -154,3 +154,7 @@ PHP SDK for Dropbox built with the v2 API
 - [x] /get_account_batch
 - [x] /get_current_account
 - [x] /get_space_usage
+----------------------
+
+## Possible Next Steps
+- Build more helper functions and classes to do common tasks

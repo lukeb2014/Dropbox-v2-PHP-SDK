@@ -33,6 +33,9 @@
             $this->users = new Users();
         }
         
+        /*
+        * Main function for handling post requests.
+        */
         public static function postRequest($endpoint, $headers, $data, $json = TRUE) {
             $ch = curl_init($endpoint);
             array_push($headers, "Authorization: Bearer " . self::$token);
@@ -48,6 +51,25 @@
                 return $r;
         }
         
+        /*
+        * Special case function for handling the from_oauth1 request
+        */
+        public static function oauth1Request($endpoint, $data, $app_key, $app_secret) {
+            $ch = curl_init($endpoint);
+            $headers = array("Content-Type: application/json");
+            curl_setopt($ch, CURLOPT_POST, TRUE);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+            curl_setopt($ch, CURLOPT_USERPWD, "$app_key:$app_secret");
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+            $r = curl_exec($ch);
+            curl_close($ch);
+            return json_decode($r, true);
+        }
+        
+        /*
+        * Updates the access token.
+        */
         public function updateAccessToken($accesstoken) {
             self::$token = $accesstoken;
         }
