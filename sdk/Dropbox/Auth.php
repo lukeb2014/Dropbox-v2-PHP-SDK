@@ -20,7 +20,7 @@
         public function from_oauth1($oauth1_token, $oauth1_token_secret, $app_key, $app_secret) {
             $endpoint = "https://api.dropboxapi.com/2/token/from_oauth1";
             $postdata = json_encode(array( "oauth1_token" => $oauth1_token, "oauth1_token_secret" => $oauth1_token_secret ));
-            $returnData = Dropbox::oauth1Request($endpoint, $postdata, $app_token, $app_secret);
+            $returnData = Dropbox::oauth1Request($endpoint, $postdata, $app_key, $app_secret);
             if (isset($returnData["error"])) {
                 return $returnData["error_summary"];
             }
