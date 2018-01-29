@@ -657,15 +657,13 @@
         /*
         * Entry must be an instanceof Entry (Dropbox\Entry)
         */
-        public function upload_session_finish(Entry $entry) {
+        public function upload_session_finish($entry) {
             $endpoint = "https://content.dropboxapi.com/2/files/upload_session/finish";
             $headers = array(
-                "Content-Type" => 'application/octet-stream',
-                "Dropbox-API-Arg" => $entry.toJson()
+                "Content-Type: application/octet-stream",
+                "Dropbox-API-Arg: ".$entry->toJson()
             );
-            $headers = json_encode($headers);
-            $postdata = file_get_contents($file_path);
-            $returnData = Dropbox::postRequest($endpoint, $headers, $postdata);
+            $returnData = Dropbox::postRequest($endpoint, $headers, null);
             if (isset($returnData["error"])) {
                 return $returnData["error_summary"];
             }
@@ -720,7 +718,7 @@
             $endpoint = "https://content.dropboxapi.com/2/files/upload_session/start";
             $headers = array(
                 "Content-Type: application/octet-stream",
-                "Dropbox-API-Arg: {\"close\": $close}"
+                "Dropbox-API-Arg: ".json_encode(['close' => $close])
             );
             $postdata = file_get_contents($file_path);
             $returnData = Dropbox::postRequest($endpoint, $headers, $postdata);
@@ -728,7 +726,7 @@
                 return $returnData["error_summary"];
             }
             else {
-                return true;
+                return $returnData["session_id"];
             }
             
         }
