@@ -1,8 +1,7 @@
 # Dropbox-v2-PHP-SDK
 PHP SDK for Dropbox built with the v2 API
 
-**IN DEVELOPMENT**
-*Last update: 10/19/2017*
+*Last update: 2/7/2018*
 
 ## Installation
 - Run `composer require lukebaird/dropbox-v2-php-sdk` in your project root
@@ -10,7 +9,7 @@ PHP SDK for Dropbox built with the v2 API
 
 ### Additional info
 - [Packagist.org link](https://packagist.org/packages/lukebaird/dropbox-v2-php-sdk)
-- Latest version: `v1.1.2-beta`
+- Latest version: `v1.1.4-beta`
 
 ## Documentation
 - Documentation will be improved in the future. Check out [Example.php](Example.php) for basic usage.
@@ -154,7 +153,3 @@ PHP SDK for Dropbox built with the v2 API
 - [x] /get_account_batch
 - [x] /get_current_account
 - [x] /get_space_usage
-----------------------
-
-## Possible Next Steps
-- Build more helper functions and classes to do common tasks
