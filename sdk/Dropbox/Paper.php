@@ -133,7 +133,7 @@
         /*
         * Returns the list of all Paper docs according to the argument specifications.
         */
-        public function list($filter_by = "docs_accessed", $sort_by = "accessed", $sort_order = "ascending", $limit = 1000) {
+        public function listp($filter_by = "docs_accessed", $sort_by = "accessed", $sort_order = "ascending", $limit = 1000) {
             $endpoint = "https//api.dropboxapi.com/2/docs/list";
             $headers = array(
                 "Content-Type: application/json"
