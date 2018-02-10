@@ -1,7 +1,7 @@
 # Dropbox-v2-PHP-SDK
 PHP SDK for Dropbox built with the v2 API
 
-*Last update: 2/7/2018*
+*Last update: 2/10/2018*
 
 ## Installation
 - Run `composer require lukebaird/dropbox-v2-php-sdk` in your project root
@@ -9,7 +9,7 @@ PHP SDK for Dropbox built with the v2 API
 
 ### Additional info
 - [Packagist.org link](https://packagist.org/packages/lukebaird/dropbox-v2-php-sdk)
-- Latest version: `v1.1.4-beta`
+- Latest version: `v1.1.5-beta`
 
 ## Documentation
 - Documentation will be improved in the future. Check out [Example.php](Example.php) for basic usage.
@@ -153,3 +153,9 @@ PHP SDK for Dropbox built with the v2 API
 - [x] /get_account_batch
 - [x] /get_current_account
 - [x] /get_space_usage
+------------------
+
+## Troubleshooting
+
+### Local Machine SSL Certificate Issues
+Dropbox requires that you have a valid SSL certificate. If you are facing an issue where the SDK is always returning `null` or `false`, this could be the issue. Try following the solution to [this StackOverflow question](https://stackoverflow.com/questions/28858351/php-ssl-certificate-error-unable-to-get-local-issuer-certificate).
