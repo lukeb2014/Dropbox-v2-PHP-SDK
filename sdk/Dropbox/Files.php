@@ -234,14 +234,16 @@
             }
         }
         
-        public function download($path) {
+        public function download($path, $target) {
             $endpoint = "https://content.dropboxapi.com/2/files/download";
             $headers = array(
                 "Content-Type: ",
                 "Dropbox-API-Arg: {\"path\": \"$path\"}"
             );
             $data = Dropbox::postRequest($endpoint, $headers, '', FALSE);
-            return $data;
+            $file = fopen($target, 'w');
+            fwrite($file, $data);
+            fclose($file);
         }
         
         /**
@@ -309,7 +311,7 @@
         * $format: jpeg or png
         * $size: default w64h64
         */
-        public function get_thumbnail($path, $size = 'w64h64', $format = 'jpeg' ) {
+        public function get_thumbnail($path, $target, $format = 'jpeg', $size = 'w64h64') {
             $endpoint = "https://content.dropboxapi.com/2/files/get_thumbnail";
             
             $headers = array(
@@ -319,13 +321,17 @@
             
             $returnData = Dropbox::postRequest($endpoint, $headers, '', FALSE);
 
+            // Check for Errors
+
             $eData = json_decode($returnData, true);
 
             if (isset($eData["error"])) {
                 return $eData["error_summary"];
             }
             else {
-                return $returnData;
+                $file = fopen($target, 'w');
+                fwrite($file, $data);
+                fclose($file);
             }
         }
 
@@ -745,7 +751,7 @@
                 return $returnData["error_summary"];
             }
             else {
-                return true;
+                return $returnData["session_id"];
             }
             
         }
