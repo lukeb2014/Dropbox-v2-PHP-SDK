@@ -34,11 +34,11 @@
         public $commit;
         
         public function __construct($session_id, $offset, $path, $mode = 'add', $autorename = false, $mute = false) {
-            $this->cursor = array(
-                "session_id" => $session_id,
+            $cursor = array(
+                "sesson_id" => $session_id,
                 "offset" => $offset
             );
-            $this->commit = array(
+            $commit = array(
                 "path" => $path,
                 "mode" => $mode,
                 "autorename" => $autorename,
@@ -48,8 +48,8 @@
         
         public function toJson() {
             return json_encode(array(
-                "cursor" => $this->cursor,
-                "commit" => $this->commit
+                "cursor" => $cursor,
+                "commit" => $commit
             ));
         }
     }

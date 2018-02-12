@@ -234,16 +234,14 @@
             }
         }
         
-        public function download($path, $target) {
+        public function download($path) {
             $endpoint = "https://content.dropboxapi.com/2/files/download";
             $headers = array(
                 "Content-Type: ",
                 "Dropbox-API-Arg: {\"path\": \"$path\"}"
             );
             $data = Dropbox::postRequest($endpoint, $headers, '', FALSE);
-            $file = fopen($target, 'w');
-            fwrite($file, $data);
-            fclose($file);
+            return $data;
         }
         
         /**
@@ -311,22 +309,41 @@
         * $format: jpeg or png
         * $size: default w64h64
         */
-        public function get_thumbnail($path, $target, $format = 'jpeg', $size = 'w64h64') {
+        public function get_thumbnail($path, $size = 'w64h64', $format = 'jpeg' ) {
             $endpoint = "https://content.dropboxapi.com/2/files/get_thumbnail";
+            
             $headers = array(
+                "Content-Type: application/octet-stream",
                 "Dropbox-API-Arg: {\"path\": \"$path\", \"format\": \"$format\", \"size\": \"$size\"}"
             );
+            
             $returnData = Dropbox::postRequest($endpoint, $headers, '', FALSE);
-            // check for errors
+
             $eData = json_decode($returnData, true);
+
             if (isset($eData["error"])) {
                 return $eData["error_summary"];
             }
             else {
-                $file = fopen($target, 'w');
-                fwrite($file, $data);
-                fclose($file);
+                return $returnData;
             }
+        }
+
+        public function getThumbnailSize($size)
+        {
+            $thumbnailSizes = [
+                'thumb' => 'w32h32',
+                'small' => 'w64h64',
+                'medium' => 'w128h128',
+                'large' => 'w640h480',
+                'huge' => 'w1024h768'
+            ];
+            return isset($thumbnailSizes[$size]) ? $thumbnailSizes[$size] : $thumbnailSizes['small'];
+        }
+
+        public function getContents($file)
+        {
+            return $file->contents;
         }
         
         /**
@@ -657,13 +674,15 @@
         /*
         * Entry must be an instanceof Entry (Dropbox\Entry)
         */
-        public function upload_session_finish($entry) {
+        public function upload_session_finish(Entry $entry) {
             $endpoint = "https://content.dropboxapi.com/2/files/upload_session/finish";
             $headers = array(
-                "Content-Type: application/octet-stream",
-                "Dropbox-API-Arg: ".$entry->toJson()
+                "Content-Type" => 'application/octet-stream',
+                "Dropbox-API-Arg" => $entry.toJson()
             );
-            $returnData = Dropbox::postRequest($endpoint, $headers, null);
+            $headers = json_encode($headers);
+            $postdata = file_get_contents($file_path);
+            $returnData = Dropbox::postRequest($endpoint, $headers, $postdata);
             if (isset($returnData["error"])) {
                 return $returnData["error_summary"];
             }
@@ -718,7 +737,7 @@
             $endpoint = "https://content.dropboxapi.com/2/files/upload_session/start";
             $headers = array(
                 "Content-Type: application/octet-stream",
-                "Dropbox-API-Arg: ".json_encode(['close' => $close])
+                "Dropbox-API-Arg: {\"close\": $close}"
             );
             $postdata = file_get_contents($file_path);
             $returnData = Dropbox::postRequest($endpoint, $headers, $postdata);
@@ -726,7 +745,7 @@
                 return $returnData["error_summary"];
             }
             else {
-                return $returnData["session_id"];
+                return true;
             }
             
         }

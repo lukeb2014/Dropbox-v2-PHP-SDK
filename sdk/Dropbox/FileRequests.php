@@ -4,11 +4,11 @@
     use Dropbox\Dropbox;
 
     class FileRequests {        
-        // ****  *****  *     ****        ***    ****   ***    *   *  ****   ****  *****   ****
-        // *       *    *     *           *  *   *     *   *   *   *  *     *        *    *    
-        // ***     *    *     ***         ***    ***   *   *   *   *  ***    ***     *     *** 
-        // *       *    *     *           *  *   *     *   *   *   *  *         *    *        *
-        // *     *****  ****  ****        *   *  ****   *** *   ***   ****  ****     *    **** 
+        // ****  *****  *     ****        ***    ****   ***    *   *  ****   ****  *****   **** 
+        // *       *    *     *           *  *   *     *   *   *   *  *     *        *    *     
+        // ***     *    *     ***         ***    ***   *   *   *   *  ***    ***     *     ***  
+        // *       *    *     *           *  *   *     *   *   *   *  *         *    *        * 
+        // *     *****  ****  ****        *   *  ****   *** *   ***   ****  ****     *    ****  
         
         
         /*
@@ -51,7 +51,7 @@
         /*
         * Returns a list of file requests owned by this user.
         */
-        public function listf() {
+        public function llist() {
             $endpoint = "https://api.dropboxapi.com/2/file_requests/list";
             $headers = array();
             $postdata = json_encode(array());
