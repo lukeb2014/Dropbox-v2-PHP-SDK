@@ -42,16 +42,20 @@
         
         public function get_current_account() {
             $endpoint = "https://api.dropboxapi.com/2/users/get_current_account";
-            $headers = array();
-            $postdata = json_encode(array());
+            $headers = array(
+                "Content-Type: application/json"
+            );
+            $postdata = "null";
             $returnData = Dropbox::postRequest($endpoint, $headers, $postdata);
             return $returnData;
         }
         
         public function get_space_usage() {
             $endpoint = "https://api.dropboxapi.com/2/users/get_space_usage";
-            $headers = array();
-            $postdata = json_encode(array());
+            $headers = array(
+                "Content-Type: application/json"
+            );
+            $postdata = "null";
             $returnData = Dropbox::postRequest($endpoint, $headers, $postdata);
             return $returnData;
         }

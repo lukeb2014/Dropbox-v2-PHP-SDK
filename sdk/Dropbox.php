@@ -20,6 +20,8 @@
         public $misc;
         public $sharing;
         public $users;
+        public $app;
+        public $client;
         
         public function __construct($accesstoken) {
             self::$token = $accesstoken;
@@ -45,6 +47,7 @@
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
             $r = curl_exec($ch);
             curl_close($ch);
+            
             if ($json)
                 return json_decode($r, true);
             else
