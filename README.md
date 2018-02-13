@@ -1,15 +1,14 @@
 # Dropbox-v2-PHP-SDK
 PHP SDK for Dropbox built with the v2 API
 
-*Last update: 2/10/2018*
+*Last update: 2/12/2018*
 
 ## Installation
 - Run `composer require lukebaird/dropbox-v2-php-sdk` in your project root
-- You may need to change/add the `minimum-stability` value in your composer.json to `beta` if you have not already done so.
 
 ### Additional info
 - [Packagist.org link](https://packagist.org/packages/lukebaird/dropbox-v2-php-sdk)
-- Latest version: `v1.1.5-beta`
+- Latest version: `v1.0.0`
 
 ## Documentation
 - Documentation will be improved in the future. Check out [Example.php](Example.php) for basic usage.
@@ -154,6 +153,11 @@ PHP SDK for Dropbox built with the v2 API
 - [x] /get_current_account
 - [x] /get_space_usage
 ------------------
+
+## Additional Functions
+
+### `Dropbox/Files->getThumbnailSize($size)`
+Converts standard thumbnail sizes into pixel values usable by Dropbox functions, i.e. `'thumb' => 'w32h32'`
 
 ## Troubleshooting
 

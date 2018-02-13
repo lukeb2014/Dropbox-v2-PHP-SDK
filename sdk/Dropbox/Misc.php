@@ -35,7 +35,7 @@
         
         public function __construct($session_id, $offset, $path, $mode = 'add', $autorename = false, $mute = false) {
             $this->cursor = array(
-                "sesson_id" => $session_id,
+                "session_id" => $session_id,
                 "offset" => $offset
             );
             $this->commit = array(
