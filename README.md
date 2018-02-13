@@ -8,7 +8,7 @@ PHP SDK for Dropbox built with the v2 API
 
 ### Additional info
 - [Packagist.org link](https://packagist.org/packages/lukebaird/dropbox-v2-php-sdk)
-- Latest version: `v1.0.0`
+- Latest version: `v1.1.6`
 
 ## Documentation
 - Documentation will be improved in the future. Check out [Example.php](Example.php) for basic usage.
