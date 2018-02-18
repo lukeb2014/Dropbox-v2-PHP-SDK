@@ -234,16 +234,26 @@
             }
         }
         
-        public function download($path, $target) {
+        /**
+        * downloads a file to the given path
+        * $output_as_file: tells the function whether or not to directly return the data
+        * or to write it to a given file.
+        */
+        public function download($path, $target, $output_as_file = true) {
             $endpoint = "https://content.dropboxapi.com/2/files/download";
             $headers = array(
                 "Content-Type: ",
                 "Dropbox-API-Arg: {\"path\": \"$path\"}"
             );
             $data = Dropbox::postRequest($endpoint, $headers, '', FALSE);
-            $file = fopen($target, 'w');
-            fwrite($file, $data);
-            fclose($file);
+            if ($output_as_file) {
+                $file = fopen($target, 'w');
+                fwrite($file, $data);
+                fclose($file);
+            }
+            else {
+                return $data;
+            }
         }
         
         /**
@@ -617,15 +627,20 @@
         }
         
         /*
+        * $file_data can be either raw string data or a path to a file
         * @parameter $mode: "add", "update", "overwrite"
         */
-        public function upload($target_path, $file_path, $mode = "add") {
+        public function upload($target_path, $file_data, $mode = "add") {
             $endpoint = "https://content.dropboxapi.com/2/files/upload";
             $headers = array(
                 "Content-Type: application/octet-stream",
                 "Dropbox-API-Arg: {\"path\": \"$target_path\", \"mode\": \"$mode\"}"       
             );
-            $postdata = file_get_contents($file_path);
+            $postdata = "";
+            if (file_exists($file_data))
+                $postdata = file_get_contents($file_data);
+            else
+                $postdata = $file_data;
             
             $returnData = Dropbox::postRequest($endpoint, $headers, $postdata);
             if (isset($returnData["error"])) {
