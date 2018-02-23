@@ -236,17 +236,16 @@
         
         /**
         * downloads a file to the given path
-        * $output_as_file: tells the function whether or not to directly return the data
-        * or to write it to a given file.
+        * pass false to $target to return rawdata
         */
-        public function download($path, $target, $output_as_file = true) {
+        public function download($path, $target) {
             $endpoint = "https://content.dropboxapi.com/2/files/download";
             $headers = array(
                 "Content-Type: ",
                 "Dropbox-API-Arg: {\"path\": \"$path\"}"
             );
             $data = Dropbox::postRequest($endpoint, $headers, '', FALSE);
-            if ($output_as_file) {
+            if ($target !== false) {
                 $file = fopen($target, 'w');
                 fwrite($file, $data);
                 fclose($file);

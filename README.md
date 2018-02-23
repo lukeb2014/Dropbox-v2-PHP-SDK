@@ -1,7 +1,7 @@
 # Dropbox-v2-PHP-SDK
 PHP SDK for Dropbox built with the v2 API
 
-*Last update: 2/12/2018*
+*Last update: 2/23/2018*
 
 ## Installation
 - Run `composer require lukebaird/dropbox-v2-php-sdk` in your project root
@@ -14,6 +14,10 @@ PHP SDK for Dropbox built with the v2 API
 - Documentation will be improved in the future. Check out [Example.php](Example.php) for basic usage.
 - [Dropbox API documentation](https://www.dropbox.com/developers/documentation/http/documentation)
 - You can look in the appropriate file to see usage.
+
+### Version 1.1.7
+- Added option to `files->upload()` and `files->download()` to upload/download raw data respectively.
+- Please see `sdk/Dropbox/Files.php` for usage.
 ----------------------
 
 **Bolded** items will not be implemented.
