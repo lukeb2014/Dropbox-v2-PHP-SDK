@@ -346,13 +346,13 @@
 
         public function getThumbnailSize($size)
         {
-            $thumbnailSizes = [
+            $thumbnailSizes = array(
                 'thumb' => 'w32h32',
                 'small' => 'w64h64',
                 'medium' => 'w128h128',
                 'large' => 'w640h480',
                 'huge' => 'w1024h768'
-            ];
+            );
             return isset($thumbnailSizes[$size]) ? $thumbnailSizes[$size] : $thumbnailSizes['small'];
         }
 
