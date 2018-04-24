@@ -1,0 +1,10 @@
+To run in localhost : folow the following steps
+1)  download  https://curl.haxx.se/ca/cacert.pem
+2) keep it to xampp->php
+3) open php.ini
+4) find for extension=php_openssl.dll and enable it
+5) find for curl.cainfo and assign curl.cainfo=c:\xampp\php\cacert.pem
+6) Resatart the server 
+
+It is working for me 
+
