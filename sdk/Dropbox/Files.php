@@ -1,7 +1,6 @@
 <?php
     namespace Dropbox\Dropbox;
     
-    use Dropbox\Entry;
     use Dropbox\Dropbox;
 
     class Files {        
