@@ -80,7 +80,7 @@
         * shared on the folder are listed and for team folders all non-team users shared on the folder are returned.
         */
         public function folder_users_list($doc_id, $limit = 1000) {
-            $endpoint = "https//api.dropboxapi.com/2/docs/folder_users/list";
+            $endpoint = "https//api.dropboxapi.com/2/paper/docs/folder_users/list";
             $headers = array(
                 "Content-Type: application/json"
             );
@@ -98,7 +98,7 @@
         * Once a cursor has been retrieved from docs/folder_users/list, use this to paginate through all users on the Paper folder.
         */
         public function folder_users_list_continue($doc_id, $cursor) {
-            $endpoint = "https//api.dropboxapi.com/2/docs/folder_users/list/continue";
+            $endpoint = "https//api.dropboxapi.com/2/paper/docs/folder_users/list/continue";
             $headers = array(
                 "Content-Type: application/json"
             );
@@ -134,7 +134,7 @@
         * Returns the list of all Paper docs according to the argument specifications.
         */
         public function llist($filter_by = "docs_accessed", $sort_by = "accessed", $sort_order = "ascending", $limit = 1000) {
-            $endpoint = "https//api.dropboxapi.com/2/docs/list";
+            $endpoint = "https//api.dropboxapi.com/2/paper/docs/list";
             $headers = array(
                 "Content-Type: application/json"
             );
@@ -143,7 +143,7 @@
         }
         
         public function list_continue($cursor) {
-            $endpoint = "https//api.dropboxapi.com/2/docs/list/continue";
+            $endpoint = "https//api.dropboxapi.com/2/paper/docs/list/continue";
             $headers = array(
                 "Content-Type: application/json"
             );
@@ -161,7 +161,7 @@
         * permanently deletes the given Paper doc.
         */
         public function permanently_delete($doc_id) {
-            $endpoint = "https//api.dropboxapi.com/2/docs/permanently_delete";
+            $endpoint = "https//api.dropboxapi.com/2/paper/docs/permanently_delete";
             $headers = array(
                 "Content-Type: application/json"
             );
@@ -179,7 +179,7 @@
         * returns the default sharing policy for the given Paper doc
         */
         public function sharing_policy_get($doc_id) {
-            $endpoint = "https//api.dropboxapi.com/2/docs/sharing_policy/get";
+            $endpoint = "https//api.dropboxapi.com/2/paper/docs/sharing_policy/get";
             $headers = array(
                 "Content-Type: application/json"
             );
@@ -201,7 +201,7 @@
         * because this setting can be changed only via the team admin console.
         */
         public function sharing_policy_set($doc_id, $public_sharing_policy, $team_sharing_policy = "") {
-            $endpoint = "https//api.dropboxapi.com/2/docs/sharing_policy/set";
+            $endpoint = "https//api.dropboxapi.com/2/paper/docs/sharing_policy/set";
             $headers = array(
                 "Content-Type: application/json"
             );
@@ -219,7 +219,7 @@
         * updates an existing Paper doc with the provided content
         */
         public function update($doc_id, $doc_update_policy, $revision, $import_format) {
-            $endpoint = "https//api.dropboxapi.com/2/docs/update";
+            $endpoint = "https//api.dropboxapi.com/2/paper/docs/update";
             $headers = array(
                 "Content-Type: application/json"
             );
@@ -239,7 +239,7 @@
         * please read the documentation for the $members format
         */
         public function users_add($doc_id, $members, $quiet = false, $custom_message = null) {
-            $endpoint = "https//api.dropboxapi.com/2/docs/users/add";
+            $endpoint = "https//api.dropboxapi.com/2/paper/docs/users/add";
             $headers = array(
                 "Content-Type: application/json"
             );
@@ -260,7 +260,7 @@
         * lists all users who visited the Paper doc or users with explicit access.
         */
         public function users_list($doc_id, $limit = 1000, $filter_by = "shared") {
-            $endpoint = "https//api.dropboxapi.com/2/docs/users/list";
+            $endpoint = "https//api.dropboxapi.com/2/paper/docs/users/list";
             $headers = array(
                 "Content-Type: application/json"
             );
@@ -275,7 +275,7 @@
         }
         
         public function users_list_continue($doc_id, $cursor) {
-            $endpoint = "https//api.dropboxapi.com/2/docs/users/list/continue";
+            $endpoint = "https//api.dropboxapi.com/2/paper/docs/users/list/continue";
             $headers = array(
                 "Content-Type: application/json"
             );
@@ -293,7 +293,7 @@
         * Allows an owner or editor to remove users from a Paper doc using their email address or Dropbox account ID.
         */
         public function users_remove($doc_id, $member) {
-            $endpoint = "https//api.dropboxapi.com/2/docs/users/remove";
+            $endpoint = "https//api.dropboxapi.com/2/paper/docs/users/remove";
             $headers = array(
                 "Content-Type: application/json"
             );

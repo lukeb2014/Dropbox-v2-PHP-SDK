@@ -244,14 +244,14 @@
                 "Content-Type: ",
                 "Dropbox-API-Arg: {\"path\": \"$path\"}"
             );
-            $data = Dropbox::postRequest($endpoint, $headers, '', FALSE);
+            $returnData = Dropbox::postRequest($endpoint, $headers, '', FALSE);
             if ($target !== false) {
                 $file = fopen($target, 'w');
-                fwrite($file, $data);
+                fwrite($file, $returnData);
                 fclose($file);
             }
             else {
-                return $data;
+                return $returnData;
             }
         }
         
@@ -291,7 +291,7 @@
             }
             else {
                 $file = fopen($target, 'w');
-                fwrite($file, $data);
+                fwrite($file, $returnData);
                 fclose($file);
             }
         }
@@ -339,7 +339,7 @@
             }
             else {
                 $file = fopen($target, 'w');
-                fwrite($file, $data);
+                fwrite($file, $returnData);
                 fclose($file);
             }
         }
