@@ -627,6 +627,9 @@
         /*
         * $file_data can be either raw string data or a path to a file
         * @parameter $mode: "add", "update", "overwrite"
+        * Note this is not memory efficient when uploading very large files
+        * As it attempts to read the file into the entire string using file_get_contents
+        * Use upload sessions in this case and broke down the uploads by "chunks"
         */
         public function upload($target_path, $file_data, $mode = "add") {
             $endpoint = "https://content.dropboxapi.com/2/files/upload";
@@ -673,34 +676,42 @@
         /**
         * append more data to an upload session.
         * a single request should not upload more than 150 MB.
+        * @postdata is a chunked content resource e.g. outputted by fread
         */
-        public function upload_session_append_v2($session_id, $offset, $file_path, $close = FALSE) {
+        public function upload_session_append_v2($session_id, $offset, $postdata, $close = false) {
             $endpoint = "https://content.dropboxapi.com/2/files/upload_session/append_v2";
+            $close = 'false';
+            if (true === $close) {
+                $close = 'true';
+            }
             $headers = array(
                 "Content-Type: application/octet-stream",
-                "Dropbox-API-Arg: {\"cursor\": {\"session_id\": \"$session_id\", \"offset\": \"$offset\"}, \"close\": $close}"
+                "Dropbox-API-Arg: {\"cursor\": {\"session_id\": \"$session_id\", \"offset\": $offset}, \"close\": $close}"
             );
-            $postdata = file_get_contents($file_path);
-            $returnData = Dropbox::postRequest($endpoint, $headers, $postdata);
-            if (isset($returnData["error"])) {
-                return $returnData["error_summary"];
-            }
-            else {
+            $returnData = Dropbox::postRequest($endpoint, $headers, $postdata, false);
+            
+            if ('null' === $returnData) {
                 return true;
+            } elseif (isset($returnData["error"])) {
+                return $returnData["error_summary"];
+            } else {
+                return false;
             }
         }
         
-        /*
-        * Entry must be an instanceof Entry (Dropbox\Entry)
-        */
-        public function upload_session_finish(Entry $entry) {
-            $endpoint = "https://content.dropboxapi.com/2/files/upload_session/finish";
+        /**
+         * 
+         * @param Entry $entry
+         * @param $postdata (This is a chunked content resource e.g. outputted by fread)
+         * @return mixed
+         */
+        public function upload_session_finish(Entry $entry, $postdata) {
+            $endpoint = "https://content.dropboxapi.com/2/files/upload_session/finish";   
+            $entry = $entry->toJson();
             $headers = array(
-                "Content-Type" => 'application/octet-stream',
-                "Dropbox-API-Arg" => $entry.toJson()
+                "Content-Type: application/octet-stream",
+                "Dropbox-API-Arg: $entry"
             );
-            $headers = json_encode($headers);
-            $postdata = file_get_contents($file_path);
             $returnData = Dropbox::postRequest($endpoint, $headers, $postdata);
             if (isset($returnData["error"])) {
                 return $returnData["error_summary"];
@@ -748,17 +759,22 @@
             }
         }
         
-        /*
-        * starts an upload session, needed where the size of a file is greater than 150 MB
-        * can last up to 48 hours
-        */
-        public function upload_session_start($file_path, $close = false) {
+        /**
+         * 
+         * @param $postdata (This is a chunked content resource e.g. outputted by fread)
+         * @param boolean $close
+         * @return mixed
+         */
+        public function upload_session_start($postdata, $close = false) {
             $endpoint = "https://content.dropboxapi.com/2/files/upload_session/start";
+            $close = 'false';
+            if (true === $close) {
+                $close = 'true';
+            }
             $headers = array(
                 "Content-Type: application/octet-stream",
                 "Dropbox-API-Arg: {\"close\": $close}"
             );
-            $postdata = file_get_contents($file_path);
             $returnData = Dropbox::postRequest($endpoint, $headers, $postdata);
             if (isset($returnData["error"])) {
                 return $returnData["error_summary"];
